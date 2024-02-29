@@ -1,3 +1,33 @@
-[gd_scene format=3 uid="uid://cttqgfopdwiv"]
+[gd_scene load_steps=5 format=3 uid="uid://cttqgfopdwiv"]
 
-[node name="Player" type="CharacterBody3D"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_n2r3j"]
+[ext_resource type="Script" path="res://Scripts/camera.gd" id="2_rtkwi"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_e5sv4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_it3ul"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_camera_3d")]
+script = ExtResource("1_n2r3j")
+_camera_3d = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("pick_ray", "object_position")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("2_rtkwi")
+pick_ray = NodePath("PickRay")
+object_position = NodePath("ObjectPosition")
+
+[node name="PickRay" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -5)
+collision_mask = 2
+
+[node name="ObjectPosition" type="Marker3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_e5sv4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_it3ul")
