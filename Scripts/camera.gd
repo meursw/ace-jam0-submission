@@ -8,6 +8,7 @@ var picked_object: RigidBody3D = null
 func _input(event):
 	if Input.is_action_just_pressed("PickUp"):
 		if not picked_object and check_for_object():
+			picked_object.freeze = true
 			picked_object.global_position = object_position.global_position
 		elif picked_object:
 			throw_object()
@@ -30,6 +31,7 @@ func check_for_object() -> bool:
 
 
 func throw_object() -> void:
+	picked_object.freeze = false
 	var throw = picked_object.global_position - self.global_position
-	picked_object.apply_central_impulse(throw)
+	picked_object.apply_central_impulse(throw * 2.0)
 	picked_object = null
