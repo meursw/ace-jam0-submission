@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://gy3jihjwfn0q"]
+[gd_scene load_steps=12 format=3 uid="uid://gy3jihjwfn0q"]
 
 [ext_resource type="PackedScene" uid="uid://cttqgfopdwiv" path="res://Scenes/player.tscn" id="1_1agov"]
 [ext_resource type="Texture2D" uid="uid://b066wyvxxa0ik" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="1_e523m"]
 [ext_resource type="PackedScene" uid="uid://cy85s8q1kheqf" path="res://Scenes/door_and_switch.tscn" id="3_lcj55"]
+[ext_resource type="Script" path="res://Scripts/colored_object.gd" id="4_wkm2v"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tsdr6"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,6 +22,9 @@ glow_blend_mode = 0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i6vge"]
 albedo_texture = ExtResource("1_e523m")
 uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onxpf"]
+albedo_color = Color(0, 1, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lrmql"]
 
@@ -51,8 +55,10 @@ collision_layer = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5143, 1, 3)
 collision_layer = 2
 gravity_scale = 0.5
+script = ExtResource("4_wkm2v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+material_override = SubResource("StandardMaterial3D_onxpf")
 mesh = SubResource("BoxMesh_lrmql")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
