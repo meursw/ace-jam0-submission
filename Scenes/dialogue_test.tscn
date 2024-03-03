@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb1uwdi2hwa2g"]
+
+[ext_resource type="Script" path="res://Scripts/dialogue_test.gd" id="1_1y0vk"]
+[ext_resource type="Resource" uid="uid://bo08kxlnnx5it" path="res://Resources/DialogueResources/test_dialogue.tres" id="2_dj45j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mitu"]
+size = Vector3(0.35, 1, 0.35)
+
+[node name="DialogueTest" type="Node3D"]
+script = ExtResource("1_1y0vk")
+dialogue = ExtResource("2_dj45j")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+size = Vector3(0.3, 1, 0.3)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_7mitu")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

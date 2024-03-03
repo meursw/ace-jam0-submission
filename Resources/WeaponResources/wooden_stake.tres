@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://ddwgkdtgxf2ie"]
+
+[ext_resource type="PackedScene" uid="uid://cqkmj34vbl4ll" path="res://Assets/Blender/WeaponAssets/wooden_stake.blend" id="1_5lytl"]
+[ext_resource type="Texture2D" uid="uid://cm6rb74roaedg" path="res://Assets/Weapon Icons/wooden_stake_icon.png" id="1_x7igd"]
+[ext_resource type="Script" path="res://Resources/ResScripts/weapon_res.gd" id="2_da27i"]
+
+[resource]
+script = ExtResource("2_da27i")
+position = Vector3(0.6, -1.25, -0.4)
+rotation = Vector3(-16, 0, 0)
+weapon_type = 0
+damage = 2
+name = "Wooden Stake"
+scene = ExtResource("1_5lytl")
+icon = ExtResource("1_x7igd")

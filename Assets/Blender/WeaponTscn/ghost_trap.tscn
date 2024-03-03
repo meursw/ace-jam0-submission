@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=3 uid="uid://mb1u55xw5fle"]
+
+[ext_resource type="PackedScene" uid="uid://c4gyvwmhn2fcv" path="res://Assets/Blender/WeaponAssets/ghost_trap.blend" id="1_bc4xf"]
+[ext_resource type="Script" path="res://Scripts/ghost_trap.gd" id="2_vi75l"]
+[ext_resource type="Resource" uid="uid://dd4685t15f3es" path="res://Resources/WeaponResources/ghost_trap.tres" id="3_c00p7"]
+[ext_resource type="Shader" uid="uid://b7gpt40523pjs" path="res://Shaders/ghost_trap.tres" id="4_mffg6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5icv7"]
+render_priority = 0
+shader = ExtResource("4_mffg6")
+
+[sub_resource type="Animation" id="Animation_pbltl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icosphere_002:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icosphere_007:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.767119, 1.83958, 0.188903)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Icosphere_003:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dt2bf"]
+resource_name = "spin_rings"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icosphere_002:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 6.28319)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icosphere_007:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.767119, 1.83958, 0.188903), Vector3(0.767945, 8.12276, 0.188496)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Icosphere_003:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0), Vector3(5.49779, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bvecy"]
+_data = {
+"RESET": SubResource("Animation_pbltl"),
+"spin_rings": SubResource("Animation_dt2bf")
+}
+
+[node name="ghost_trap" instance=ExtResource("1_bc4xf")]
+script = ExtResource("2_vi75l")
+weapon_resource = ExtResource("3_c00p7")
+
+[node name="Cube" parent="." index="0"]
+layers = 2
+
+[node name="Icosphere" parent="." index="1"]
+layers = 2
+material_override = SubResource("ShaderMaterial_5icv7")
+
+[node name="Icosphere_002" parent="." index="2"]
+layers = 2
+
+[node name="Icosphere_007" parent="." index="3"]
+transform = Transform3D(-0.0966772, 0.505696, 0.496368, 0.0966802, 0.505696, -0.496368, -0.701971, 2.13135e-06, -0.136724, 0, 0.306571, 0)
+layers = 2
+
+[node name="Icosphere_003" parent="." index="4"]
+transform = Transform3D(0.778571, 0, 0, 0, 0.550533, 0.550533, 0, -0.550533, 0.550533, 0, 0.306571, 0)
+layers = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_bvecy")
+}
+autoplay = "spin_rings"

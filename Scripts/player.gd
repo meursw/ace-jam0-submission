@@ -1,19 +1,27 @@
+class_name Player
 extends CharacterBody3D
 
 @export_category("Player")
 @export_subgroup("Player Nodes")
 @export var _camera_3d: Camera3D
+@export var weapon_handler: Node3D
+@export_subgroup("Player Resources")
+@export var run_time_data: RunTimeData
 @export_subgroup("Player Variables")
 @export var _speed := 5.0
 @export var _gravity := 9.8
 @export var _mouse_sens := 0.1
 
+var inventory: Inventory = Inventory.new()
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
-	#_apply_gravity(delta)
-	_movement()
+	_apply_gravity(delta)
+	if run_time_data.curr_gameplay_state == Enums.GameState.FREE:
+		#_handle_jump()
+		_movement()
 
 func _input(event):
 	camera_control(event)
@@ -33,12 +41,16 @@ func _movement() -> void:
 	
 	move_and_slide()
 
-func _apply_gravity(delta) -> void:
+func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
 		if velocity.y >= 0:
 			velocity.y -= _gravity * delta
 		else:
 			velocity.y -= _gravity * delta 
+
+func _handle_jump() -> void:
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = 5.0
 
 func camera_control(event: InputEvent) -> void:
 	var mouse_motion = event as InputEventMouseMotion
@@ -48,3 +60,10 @@ func camera_control(event: InputEvent) -> void:
 		var camera_tilt = _camera_3d.rotation_degrees.x
 		camera_tilt -= mouse_motion.relative.y * _mouse_sens
 		_camera_3d.rotation_degrees.x = clampf(camera_tilt,-90,90)
+
+func pick_up_item(item:Item):
+	inventory.add_item(item)
+	if item is Weapon:
+		weapon_handler.add_weapon(item)
+	GameEvents.item_picked_up.emit(item)
+

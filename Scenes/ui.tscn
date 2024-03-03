@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs7m78tstb6od"]
+
+[ext_resource type="Script" path="res://Scripts/dialogue_ui.gd" id="1_elvta"]
+[ext_resource type="Resource" uid="uid://cf8j54goebfk0" path="res://Resources/run_time_data.tres" id="2_wtgd1"]
+[ext_resource type="PackedScene" uid="uid://chkb3l7g7c56l" path="res://Scenes/inventory_ui.tscn" id="3_18v1u"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="DialogueUI" type="Control" parent="." node_paths=PackedStringArray("dialogue_label")]
+visible = false
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_right = 200.0
+grow_vertical = 0
+script = ExtResource("1_elvta")
+run_time_data = ExtResource("2_wtgd1")
+dialogue_label = NodePath("DialogueBG/Label")
+
+[node name="Avatar" type="TextureRect" parent="DialogueUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -109.0
+offset_right = -91.333
+offset_bottom = -0.333
+grow_vertical = 0
+expand_mode = 1
+
+[node name="DialogueBG" type="ColorRect" parent="DialogueUI"]
+custom_minimum_size = Vector2(600, 80)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -61.0
+offset_top = -76.0
+offset_right = 539.0
+offset_bottom = 5.60498
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.101961, 0.109804, 0.384314, 0.635294)
+
+[node name="Label" type="Label" parent="DialogueUI/DialogueBG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "TEXT"
+
+[node name="InventoryUI" parent="." instance=ExtResource("3_18v1u")]
