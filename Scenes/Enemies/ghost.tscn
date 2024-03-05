@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://g84m6pdvsd65"]
+
+[ext_resource type="PackedScene" uid="uid://bbfhm5a3h3qgj" path="res://Scenes/Enemies/base_enemy.tscn" id="1_gx8wj"]
+[ext_resource type="Script" path="res://Scripts/ghost.gd" id="2_r7hg1"]
+[ext_resource type="PackedScene" uid="uid://e1bgnlg1kq18" path="res://Assets/Blender/Enemies/ghost.blend" id="3_pwjxx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bvj4v"]
+size = Vector3(2.8, 2.6, 1.2)
+
+[node name="Ghost" instance=ExtResource("1_gx8wj")]
+script = ExtResource("2_r7hg1")
+
+[node name="ghost" parent="." index="0" instance=ExtResource("3_pwjxx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0999999, 1.6, -0.1)
+shape = SubResource("BoxShape3D_bvj4v")

@@ -3,15 +3,15 @@
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_n2r3j"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="2_rtkwi"]
 [ext_resource type="Script" path="res://Scripts/weapon_handler.gd" id="2_tawb1"]
-[ext_resource type="PackedScene" uid="uid://c82ayaxnwv2l0" path="res://Assets/Blender/WeaponTscn/holy_book.tscn" id="3_k4qh5"]
-[ext_resource type="PackedScene" uid="uid://b8axe5s63huta" path="res://Assets/Blender/WeaponTscn/wooden_stake.tscn" id="4_7pvpt"]
-[ext_resource type="PackedScene" uid="uid://mb1u55xw5fle" path="res://Assets/Blender/WeaponTscn/ghost_trap.tscn" id="5_3extj"]
+[ext_resource type="PackedScene" uid="uid://c82ayaxnwv2l0" path="res://Scenes/Weapons/holy_book.tscn" id="3_k4qh5"]
+[ext_resource type="PackedScene" uid="uid://b8axe5s63huta" path="res://Scenes/Weapons/wooden_stake.tscn" id="4_7pvpt"]
+[ext_resource type="PackedScene" uid="uid://mb1u55xw5fle" path="res://Scenes/Weapons/ghost_trap.tscn" id="5_3extj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e5sv4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_it3ul"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_camera_3d", "weapon_handler")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_camera_3d", "weapon_handler") groups=["player"]]
 collision_layer = 5
 script = ExtResource("1_n2r3j")
 _camera_3d = NodePath("MainCamera")

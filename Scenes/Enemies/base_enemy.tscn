@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbfhm5a3h3qgj"]
+
+[ext_resource type="Script" path="res://Scripts/base_enemy.gd" id="1_pf22u"]
+
+[node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent")]
+script = ExtResource("1_pf22u")
+nav_agent = NodePath("NavigationAgent3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

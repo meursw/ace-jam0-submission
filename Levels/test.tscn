@@ -1,16 +1,16 @@
-[gd_scene load_steps=20 format=3 uid="uid://cjjp4jyalnsfx"]
+[gd_scene load_steps=21 format=3 uid="uid://cjjp4jyalnsfx"]
 
 [ext_resource type="Shader" path="res://Shaders/ps1_postprocess.gdshader" id="1_su2gp"]
 [ext_resource type="PackedScene" uid="uid://cttqgfopdwiv" path="res://Scenes/player.tscn" id="2_ktwxo"]
-[ext_resource type="PackedScene" uid="uid://bb1uwdi2hwa2g" path="res://Scenes/dialogue_test.tscn" id="3_nbenb"]
 [ext_resource type="Resource" uid="uid://cf8j54goebfk0" path="res://Resources/run_time_data.tres" id="3_pvpn5"]
-[ext_resource type="PackedScene" uid="uid://cs7m78tstb6od" path="res://Scenes/ui.tscn" id="4_ghlyx"]
+[ext_resource type="PackedScene" uid="uid://cs7m78tstb6od" path="res://Scenes/UI/ui.tscn" id="4_ghlyx"]
 [ext_resource type="Texture2D" uid="uid://bv60nv6dgc4d8" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="5_sevgq"]
 [ext_resource type="PackedScene" uid="uid://cfgilkh2r3kxv" path="res://Scenes/pickup.tscn" id="6_a60k4"]
 [ext_resource type="Resource" uid="uid://ux3wm1vnteyh" path="res://Resources/WeaponResources/holy_book.tres" id="7_qnu40"]
 [ext_resource type="Resource" uid="uid://ddwgkdtgxf2ie" path="res://Resources/WeaponResources/wooden_stake.tres" id="9_oh5du"]
+[ext_resource type="PackedScene" uid="uid://g84m6pdvsd65" path="res://Scenes/Enemies/ghost.tscn" id="10_34ovo"]
 [ext_resource type="Resource" uid="uid://dd4685t15f3es" path="res://Resources/WeaponResources/ghost_trap.tres" id="10_x2jc3"]
-[ext_resource type="PackedScene" uid="uid://e1bgnlg1kq18" path="res://Assets/Blender/Enemies/ghost.blend" id="11_n8a8d"]
+[ext_resource type="PackedScene" uid="uid://cvontqffavtmh" path="res://Assets/Blender/Enemies/imp1.blend" id="12_64kcw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l6bkl"]
 shader = ExtResource("1_su2gp")
@@ -37,10 +37,6 @@ sky = SubResource("Sky_do8xd")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kg436"]
-albedo_texture = ExtResource("5_sevgq")
-uv1_triplanar = true
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_p85nw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p0nvq"]
@@ -48,9 +44,20 @@ radius = 0.148482
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bdkqc"]
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_s7xr0"]
+vertices = PackedVector3Array(-3.75, 0, -8, -1.75, 0, -8, -1.75, 0, -49.5, -4, 0, -6.75, -3.75, 0, -8, -1.75, 0, -49.5, -49.5, 0, -49.5, -49.5, 0, -6.75, -1.75, 0, -8, 5, 0, -8, 5, 0, -49.5, -1.75, 0, -49.5, 5, 0, -49.5, 5, 0, -8, 7, 0, -8, 7, 0, -8, 7.25, 0, -7, 49.5, 0, -7, 49.5, 0, -49.5, 5, 0, -49.5, 49.5, 0, -7, 7.25, 0, -7, 6.75, 0, -5.75, 5.5, 0, 49.5, 49.5, 0, 49.5, 6.75, 0, -5.75, 5.25, 0, -5.75, 5.5, 0, 49.5, -3.75, 0, -5.75, -4, 0, -6.75, -49.5, 0, -6.75, -49.5, 0, 49.5, -2.5, 0, 49.5, -2.5, 0, 49.5, -2.25, 0, -5.75, -3.75, 0, -5.75, -2.5, 0, 49.5, 5.5, 0, 49.5, 5.25, 0, -5.75, -2.25, 0, -5.75)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 7), PackedInt32Array(5, 7, 6), PackedInt32Array(11, 10, 8), PackedInt32Array(8, 10, 9), PackedInt32Array(14, 13, 12), PackedInt32Array(15, 19, 16), PackedInt32Array(16, 19, 17), PackedInt32Array(17, 19, 18), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 24), PackedInt32Array(22, 24, 23), PackedInt32Array(27, 26, 25), PackedInt32Array(29, 28, 30), PackedInt32Array(30, 28, 31), PackedInt32Array(31, 28, 32), PackedInt32Array(35, 34, 33), PackedInt32Array(39, 38, 36), PackedInt32Array(36, 38, 37)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kg436"]
+albedo_texture = ExtResource("5_sevgq")
+uv1_triplanar = true
+
 [node name="Node3D" type="Node3D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Misc" type="Node" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Misc"]
+visible = false
 top_level = true
 light_mask = 7
 visibility_layer = 1023
@@ -58,51 +65,72 @@ material = SubResource("ShaderMaterial_l6bkl")
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="UI" parent="." instance=ExtResource("4_ghlyx")]
+[node name="UI" parent="Misc" instance=ExtResource("4_ghlyx")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="InventoryUI" parent="Misc/UI" index="1"]
+offset_left = 838.0
+offset_top = 539.0
+offset_right = 78.0
+offset_bottom = -109.0
+scale = Vector2(0.8, 0.8)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Misc"]
 environment = SubResource("Environment_gmkk3")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Misc"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_ktwxo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
 run_time_data = ExtResource("3_pvpn5")
+_speed = 12.0
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="PickUps" type="Node" parent="."]
+
+[node name="Pickup" parent="PickUps" instance=ExtResource("6_a60k4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.361971, -2)
+item = ExtResource("7_qnu40")
+
+[node name="CollisionShape3D" parent="PickUps/Pickup" index="0"]
+shape = SubResource("SphereShape3D_p85nw")
+
+[node name="Pickup2" parent="PickUps" instance=ExtResource("6_a60k4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
+item = ExtResource("9_oh5du")
+
+[node name="CollisionShape3D" parent="PickUps/Pickup2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("CapsuleShape3D_p0nvq")
+
+[node name="Pickup3" parent="PickUps" instance=ExtResource("6_a60k4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
+item = ExtResource("10_x2jc3")
+
+[node name="CollisionShape3D" parent="PickUps/Pickup3" index="0"]
+shape = SubResource("SphereShape3D_bdkqc")
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="imp1" parent="Enemies" instance=ExtResource("12_64kcw")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 5.31311, 0.5, 0.875439)
+
+[node name="Ghost" parent="Enemies" instance=ExtResource("10_34ovo")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 41)
+_speed = 8.0
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_s7xr0")
+
+[node name="Enviroment" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Enviroment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 material_override = SubResource("StandardMaterial3D_kg436")
 use_collision = true
 size = Vector3(100, 1, 100)
 
-[node name="DialogueTest" parent="." instance=ExtResource("3_nbenb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-
-[node name="Pickup" parent="." instance=ExtResource("6_a60k4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.361971, -2)
-item = ExtResource("7_qnu40")
-
-[node name="CollisionShape3D" parent="Pickup" index="0"]
-shape = SubResource("SphereShape3D_p85nw")
-
-[node name="Pickup2" parent="." instance=ExtResource("6_a60k4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
-item = ExtResource("9_oh5du")
-
-[node name="CollisionShape3D" parent="Pickup2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-shape = SubResource("CapsuleShape3D_p0nvq")
-
-[node name="Pickup3" parent="." instance=ExtResource("6_a60k4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -2)
-item = ExtResource("10_x2jc3")
-
-[node name="CollisionShape3D" parent="Pickup3" index="0"]
-shape = SubResource("SphereShape3D_bdkqc")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Enviroment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.5, -7)
 layers = 1048573
 use_collision = true
@@ -110,9 +138,7 @@ collision_layer = 3
 collision_mask = 3
 size = Vector3(10, 4, 1)
 
-[node name="ghost" parent="." instance=ExtResource("11_n8a8d")]
-transform = Transform3D(-0.307022, 0.477886, -0.823021, 0.169938, 0.878418, 0.446658, 0.936407, -0.00272866, -0.350904, 7.68783, -0.500004, 1.08256)
-
-[editable path="Pickup"]
-[editable path="Pickup2"]
-[editable path="Pickup3"]
+[editable path="Misc/UI"]
+[editable path="PickUps/Pickup"]
+[editable path="PickUps/Pickup2"]
+[editable path="PickUps/Pickup3"]
