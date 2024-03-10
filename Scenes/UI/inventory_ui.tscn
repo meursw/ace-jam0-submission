@@ -48,11 +48,165 @@ custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
+[node name="Highlight" type="Control" parent="ItemGrid/HBoxContainer/WoodenStake"]
+visible = false
+custom_minimum_size = Vector2(128, 128)
+anchors_preset = 0
+
+[node name="ColorRect" type="ColorRect" parent="ItemGrid/HBoxContainer/WoodenStake/Highlight"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+offset_bottom = 3.0
+grow_vertical = 2
+color = Color(0.682353, 0.431373, 1, 0.47451)
+
+[node name="ColorRect2" type="ColorRect" parent="ItemGrid/HBoxContainer/WoodenStake/Highlight"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_bottom = 7.0
+grow_horizontal = 2
+color = Color(0.682353, 0.431373, 1, 0.47451)
+
+[node name="ColorRect3" type="ColorRect" parent="ItemGrid/HBoxContainer/WoodenStake/Highlight"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 7.0
+offset_bottom = 3.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.682353, 0.431373, 1, 0.47451)
+
+[node name="ColorRect4" type="ColorRect" parent="ItemGrid/HBoxContainer/WoodenStake/Highlight"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -2.0
+offset_right = -8.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.682353, 0.431373, 1, 0.47451)
+
 [node name="HolyBook" type="Control" parent="ItemGrid/HBoxContainer"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_vertical = 4
 
+[node name="Highlight" type="Control" parent="ItemGrid/HBoxContainer/HolyBook"]
+visible = false
+z_index = 100
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ColorRect" type="ColorRect" parent="ItemGrid/HBoxContainer/HolyBook/Highlight"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+offset_bottom = 3.0
+grow_vertical = 2
+color = Color(0.682353, 0.431373, 1, 0.47451)
+
+[node name="ColorRect2" type="ColorRect" parent="ItemGrid/HBoxContainer/HolyBook/Highlight"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_bottom = 7.0
+grow_horizontal = 2
+color = Color(0.682353, 0.431373, 1, 0.47451)
+
+[node name="ColorRect3" type="ColorRect" parent="ItemGrid/HBoxContainer/HolyBook/Highlight"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 7.0
+offset_bottom = 3.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.682353, 0.431373, 1, 0.47451)
+
+[node name="ColorRect4" type="ColorRect" parent="ItemGrid/HBoxContainer/HolyBook/Highlight"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -2.0
+offset_right = -8.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.682353, 0.431373, 1, 0.47451)
+
 [node name="GhostTrap" type="Control" parent="ItemGrid/HBoxContainer"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
+
+[node name="Highlight" type="Control" parent="ItemGrid/HBoxContainer/GhostTrap"]
+visible = false
+z_index = 100
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ColorRect" type="ColorRect" parent="ItemGrid/HBoxContainer/GhostTrap/Highlight"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 8.0
+offset_bottom = 3.0
+grow_vertical = 2
+color = Color(0.682353, 0.431373, 1, 0.47451)
+
+[node name="ColorRect2" type="ColorRect" parent="ItemGrid/HBoxContainer/GhostTrap/Highlight"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_bottom = 7.0
+grow_horizontal = 2
+color = Color(0.682353, 0.431373, 1, 0.47451)
+
+[node name="ColorRect3" type="ColorRect" parent="ItemGrid/HBoxContainer/GhostTrap/Highlight"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 7.0
+offset_bottom = 3.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.682353, 0.431373, 1, 0.47451)
+
+[node name="ColorRect4" type="ColorRect" parent="ItemGrid/HBoxContainer/GhostTrap/Highlight"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -2.0
+offset_right = -8.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.682353, 0.431373, 1, 0.47451)

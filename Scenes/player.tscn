@@ -1,67 +1,74 @@
-[gd_scene load_steps=9 format=3 uid="uid://cttqgfopdwiv"]
+[gd_scene load_steps=13 format=3 uid="uid://cttqgfopdwiv"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_n2r3j"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="2_rtkwi"]
 [ext_resource type="Script" path="res://Scripts/weapon_handler.gd" id="2_tawb1"]
+[ext_resource type="PackedScene" uid="uid://b8axe5s63huta" path="res://Scenes/Weapons/wooden_stake.tscn" id="3_4ww8v"]
 [ext_resource type="PackedScene" uid="uid://c82ayaxnwv2l0" path="res://Scenes/Weapons/holy_book.tscn" id="3_k4qh5"]
-[ext_resource type="PackedScene" uid="uid://b8axe5s63huta" path="res://Scenes/Weapons/wooden_stake.tscn" id="4_7pvpt"]
-[ext_resource type="PackedScene" uid="uid://mb1u55xw5fle" path="res://Scenes/Weapons/ghost_trap.tscn" id="5_3extj"]
+[ext_resource type="Script" path="res://Components/health_component.gd" id="7_8knd6"]
+[ext_resource type="Script" path="res://Components/hurt_component.gd" id="8_g3lh2"]
+[ext_resource type="Script" path="res://Components/destroy_component.gd" id="9_20rbu"]
+[ext_resource type="Script" path="res://Components/hurtbox_component.gd" id="9_73xhr"]
+[ext_resource type="PackedScene" uid="uid://mb1u55xw5fle" path="res://Scenes/Weapons/ghost_trap.tscn" id="9_i2t8l"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_it3ul"]
+radius = 0.61
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e5sv4"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_it3ul"]
-
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_camera_3d", "weapon_handler") groups=["player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_camera_3d", "weapon_handler", "hurtbox_component", "health_component") groups=["player"]]
 collision_layer = 5
 script = ExtResource("1_n2r3j")
 _camera_3d = NodePath("MainCamera")
-weapon_handler = NodePath("HUD/SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler")
+weapon_handler = NodePath("MainCamera/WeaponHandler")
+hurtbox_component = NodePath("HurtboxComponent")
+health_component = NodePath("HealthComponent")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HUD"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_it3ul")
 
-[node name="SubViewport" type="SubViewport" parent="HUD/SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1152, 648)
-render_target_update_mode = 4
-
-[node name="WeaponCamera" type="Camera3D" parent="HUD/SubViewportContainer/SubViewport"]
+[node name="MainCamera" type="Camera3D" parent="." node_paths=PackedStringArray("pick_ray")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-cull_mask = 2
 current = true
+script = ExtResource("2_rtkwi")
+pick_ray = NodePath("Raycast")
 
-[node name="WeaponHandler" type="Node3D" parent="HUD/SubViewportContainer/SubViewport/WeaponCamera"]
+[node name="Raycast" type="RayCast3D" parent="MainCamera"]
+target_position = Vector3(0, 0, -5)
+collision_mask = 10
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="WeaponHandler" type="Node3D" parent="MainCamera"]
 script = ExtResource("2_tawb1")
-weapon_array = Array[PackedScene]([ExtResource("4_7pvpt"), ExtResource("3_k4qh5"), ExtResource("5_3extj")])
+weapon_array = Array[PackedScene]([ExtResource("3_4ww8v"), ExtResource("3_k4qh5"), ExtResource("9_i2t8l")])
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_e5sv4")
 
-[node name="MainCamera" type="Camera3D" parent="." node_paths=PackedStringArray("pick_ray")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-cull_mask = 1048573
-current = true
-script = ExtResource("2_rtkwi")
-pick_ray = NodePath("PickRay")
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("7_8knd6")
+health = 100
 
-[node name="PickRay" type="RayCast3D" parent="MainCamera"]
-target_position = Vector3(0, 0, -5)
-collision_mask = 2
-collide_with_areas = true
-collide_with_bodies = false
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("health_comp", "hurtbox_comp")]
+script = ExtResource("8_g3lh2")
+health_comp = NodePath("../HealthComponent")
+hurtbox_comp = NodePath("../HurtboxComponent")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="MainCamera"]
-remote_path = NodePath("../../HUD/SubViewportContainer/SubViewport/WeaponCamera")
+[node name="DestroyComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "health_comp")]
+script = ExtResource("9_20rbu")
+actor = NodePath("..")
+health_comp = NodePath("../HealthComponent")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="HurtboxComponent" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("9_73xhr")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HurtboxComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_it3ul")

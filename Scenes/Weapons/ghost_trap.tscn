@@ -1,13 +1,41 @@
-[gd_scene load_steps=9 format=3 uid="uid://mb1u55xw5fle"]
+[gd_scene load_steps=16 format=3 uid="uid://mb1u55xw5fle"]
 
 [ext_resource type="PackedScene" uid="uid://c4gyvwmhn2fcv" path="res://Assets/Blender/WeaponAssets/ghost_trap.blend" id="1_bc4xf"]
 [ext_resource type="Script" path="res://Scripts/ghost_trap.gd" id="2_vi75l"]
 [ext_resource type="Resource" uid="uid://dd4685t15f3es" path="res://Resources/WeaponResources/ghost_trap.tres" id="3_c00p7"]
-[ext_resource type="Shader" uid="uid://b7gpt40523pjs" path="res://Shaders/ghost_trap.tres" id="4_mffg6"]
+[ext_resource type="Shader" uid="uid://b7gpt40523pjs" path="res://Shaders/ghost_trap.tres" id="4_pr36m"]
+[ext_resource type="Script" path="res://Components/hitbox_component.gd" id="5_lgjwd"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5icv7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u8iic"]
+albedo_color = Color(0.160784, 0.0235294, 0.156863, 1)
+metallic = 0.7
+roughness = 0.56
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xp4d4"]
 render_priority = 0
-shader = ExtResource("4_mffg6")
+shader = ExtResource("4_pr36m")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnhq1"]
+transparency = 1
+blend_mode = 2
+emission_enabled = true
+emission = Color(0.407843, 0.0980392, 0.101961, 1)
+emission_energy_multiplier = 7.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6hwhc"]
+render_priority = 0
+shader = ExtResource("4_pr36m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkc16"]
+render_priority = 0
+shader = ExtResource("4_pr36m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xo4cc"]
+render_priority = 0
+shader = ExtResource("4_pr36m")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s1lr7"]
+radius = 2.0
 
 [sub_resource type="Animation" id="Animation_pbltl"]
 length = 0.001
@@ -95,29 +123,57 @@ _data = {
 "spin_rings": SubResource("Animation_dt2bf")
 }
 
-[node name="ghost_trap" instance=ExtResource("1_bc4xf")]
+[node name="ghost_trap" node_paths=PackedStringArray("hitbox_comp") instance=ExtResource("1_bc4xf")]
 script = ExtResource("2_vi75l")
+hitbox_comp = NodePath("HitboxComponent")
 weapon_resource = ExtResource("3_c00p7")
 
 [node name="Cube" parent="." index="0"]
-layers = 2
+layers = 3
+material_override = SubResource("StandardMaterial3D_u8iic")
 
 [node name="Icosphere" parent="." index="1"]
-layers = 2
-material_override = SubResource("ShaderMaterial_5icv7")
+layers = 3
+material_override = SubResource("ShaderMaterial_xp4d4")
+material_overlay = SubResource("StandardMaterial3D_vnhq1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Icosphere" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0502579, 0)
+light_color = Color(1, 0.403922, 0.329412, 1)
+light_energy = 2.539
+light_negative = true
+light_specular = 3.577
+omni_range = 0.383
+omni_attenuation = 2.29739
 
 [node name="Icosphere_002" parent="." index="2"]
-layers = 2
+layers = 3
+material_override = SubResource("ShaderMaterial_6hwhc")
 
 [node name="Icosphere_007" parent="." index="3"]
 transform = Transform3D(-0.0966772, 0.505696, 0.496368, 0.0966802, 0.505696, -0.496368, -0.701971, 2.13135e-06, -0.136724, 0, 0.306571, 0)
-layers = 2
+layers = 3
+material_override = SubResource("ShaderMaterial_kkc16")
 
 [node name="Icosphere_003" parent="." index="4"]
 transform = Transform3D(0.778571, 0, 0, 0, 0.550533, 0.550533, 0, -0.550533, 0.550533, 0, 0.306571, 0)
-layers = 2
+layers = 3
+material_override = SubResource("ShaderMaterial_xo4cc")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+[node name="HitboxComponent" type="Area3D" parent="." index="5" node_paths=PackedStringArray("timer")]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("5_lgjwd")
+timer = NodePath("Timer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("SphereShape3D_s1lr7")
+
+[node name="Timer" type="Timer" parent="HitboxComponent" index="1"]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 libraries = {
 "": SubResource("AnimationLibrary_bvecy")
 }

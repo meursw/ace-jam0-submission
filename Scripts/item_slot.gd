@@ -1,6 +1,4 @@
-extends PanelContainer
-
-@export var texture_rect : TextureRect
+extends TextureRect
 
 func display(item:Item):
-	texture_rect.texture = item.icon
+	self.texture = item.icon

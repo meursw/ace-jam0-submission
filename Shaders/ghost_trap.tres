@@ -1,7 +1,10 @@
-[gd_resource type="VisualShader" load_steps=2 format=3 uid="uid://b7gpt40523pjs"]
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://b7gpt40523pjs"]
 
 [sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_gutsx"]
-default_input_values = [2, false, 3, 2.0]
+default_input_values = [2, false, 3, 0.75]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_kvedt"]
+constant = Color(0.880194, 0.330894, 0.422061, 1)
 
 [resource]
 code = "shader_type spatial;
@@ -11,18 +14,25 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_s
 
 
 void fragment() {
+// ColorConstant:3
+	vec4 n_out3p0 = vec4(0.880194, 0.330894, 0.422061, 1.000000);
+
+
 // Fresnel:2
-	float n_in2p3 = 2.00000;
+	float n_in2p3 = 0.75000;
 	float n_out2p0 = pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), n_in2p3);
 
 
 // Output:0
-	ALBEDO = vec3(n_out2p0);
-	EMISSION = vec3(n_out2p0);
+	ALBEDO = vec3(n_out3p0.xyz);
+	ALPHA = n_out2p0;
+	EMISSION = vec3(n_out3p0.xyz);
 
 
 }
 "
 nodes/fragment/2/node = SubResource("VisualShaderNodeFresnel_gutsx")
 nodes/fragment/2/position = Vector2(20, 140)
-nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 2, 0, 0, 5)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_kvedt")
+nodes/fragment/3/position = Vector2(100, 300)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 3, 0, 0, 5, 2, 0, 0, 1)

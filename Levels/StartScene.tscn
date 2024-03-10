@@ -1,0 +1,134 @@
+[gd_scene load_steps=16 format=3 uid="uid://degmsvc1b3w5y"]
+
+[ext_resource type="Script" path="res://Levels/StartScene.gd" id="1_1yq73"]
+[ext_resource type="PackedScene" uid="uid://dy1tq38q4y6u" path="res://Assets/Blender/acerola_logo.blend" id="1_aaiod"]
+[ext_resource type="Shader" path="res://Shaders/ps1_postprocess.gdshader" id="1_bua0n"]
+[ext_resource type="Texture2D" uid="uid://ce60yhygy5q7" path="res://72d8ND.png" id="2_e6mux"]
+[ext_resource type="Script" path="res://Assets/Blender/acerola_logo.gd" id="2_m07sj"]
+[ext_resource type="FontFile" uid="uid://b388nkoubou0m" path="res://Assets/Fonts/CINZEL-BOLD.TTF" id="5_4m8dr"]
+[ext_resource type="PackedScene" uid="uid://pxurkal5ey0q" path="res://Assets/Blender/Enviroment/pedestal.blend" id="6_m8tqd"]
+[ext_resource type="PackedScene" uid="uid://br6vtk1wntwia" path="res://Assets/Blender/WeaponAssets/holy_book.blend" id="7_8fgtk"]
+[ext_resource type="PackedScene" uid="uid://b1wshk86vdkod" path="res://Assets/Blender/WeaponAssets/wooden_stake.blend" id="8_cs362"]
+[ext_resource type="PackedScene" uid="uid://b2es3qxngmbop" path="res://Assets/Blender/WeaponAssets/ghost_trap_pickup.tscn" id="9_37f67"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_toh8c"]
+shader = ExtResource("1_bua0n")
+shader_parameter/change_color_depth = true
+shader_parameter/target_color_depth = 3
+shader_parameter/dithering = true
+shader_parameter/scale_resolution = true
+shader_parameter/target_resolution_scale = 3
+shader_parameter/enable_recolor = false
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7beqf"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+sky_curve = 0.053033
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+ground_curve = 0.0386375
+
+[sub_resource type="Sky" id="Sky_vj7oo"]
+sky_material = SubResource("ProceduralSkyMaterial_7beqf")
+
+[sub_resource type="Environment" id="Environment_0bitv"]
+background_mode = 2
+sky = SubResource("Sky_vj7oo")
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0, 0, 1)
+tonemap_mode = 3
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5dnrp"]
+albedo_texture = ExtResource("2_e6mux")
+
+[node name="StartScene" type="Node3D"]
+script = ExtResource("1_1yq73")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+top_level = true
+light_mask = 0
+material = SubResource("ShaderMaterial_toh8c")
+offset_right = 1630.0
+offset_bottom = 1009.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0bitv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+fov = 2.0
+
+[node name="acerola_logo" parent="." instance=ExtResource("1_aaiod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.2, -13.2, -888.7)
+visible = false
+script = ExtResource("2_m07sj")
+
+[node name="Plane_001" parent="acerola_logo" index="0"]
+transform = Transform3D(8.21831, 0, 0, 0, -1.1369e-07, -2.60092, 0, 2.60092, -1.1369e-07, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_5dnrp")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.8571, -3070.14)
+pixel_size = 0.25
+modulate = Color(1, 0.992157, 1, 1)
+text = "BIRTH BY TRIAL"
+font = ExtResource("5_4m8dr")
+font_size = 37
+outline_size = 17
+
+[node name="pedestal" parent="." instance=ExtResource("6_m8tqd")]
+transform = Transform3D(0.661404, 0, -0.75003, 0, 1, 0, 0.75003, 0, 0.661404, -1, -1, -60.238)
+
+[node name="holy_book" parent="pedestal" instance=ExtResource("7_8fgtk")]
+unique_name_in_owner = true
+transform = Transform3D(0.242705, 0.170327, 0.045639, 0, 0.0776457, -0.289778, -0.176336, 0.234435, 0.0628167, 0.0316467, 0.8, 0.0279045)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="pedestal"]
+transform = Transform3D(0.748556, 0.661403, -0.0470032, 0.0626685, -2.7209e-08, 0.998034, 0.660103, -0.75003, -0.0414492, 0, 1.28462, 0)
+light_color = Color(0.909804, 0.94902, 0.564706, 1)
+light_energy = 13.767
+light_indirect_energy = 9.341
+light_volumetric_fog_energy = 0.335
+spot_range = 0.915
+spot_attenuation = 0.901251
+spot_angle = 18.19
+spot_angle_attenuation = 1.93187
+
+[node name="pedestal2" parent="." instance=ExtResource("6_m8tqd")]
+transform = Transform3D(0.661404, 0, -0.75003, 0, 1, 0, 0.75003, 0, 0.661404, 1, -1, -60.238)
+
+[node name="ghost_trap" parent="pedestal2" instance=ExtResource("9_37f67")]
+unique_name_in_owner = true
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.8, 0)
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="pedestal2"]
+transform = Transform3D(0.748556, 0.661403, -0.0470032, 0.0626685, -7.91728e-09, 0.998034, 0.660103, -0.75003, -0.0414491, -0.0267143, 1.31591, 0.0302925)
+light_color = Color(0.909804, 0.94902, 0.564706, 1)
+light_energy = 13.767
+light_indirect_energy = 9.341
+light_volumetric_fog_energy = 0.335
+spot_range = 0.915
+spot_attenuation = 0.901251
+spot_angle = 18.19
+spot_angle_attenuation = 1.93187
+
+[node name="pedestal3" parent="." instance=ExtResource("6_m8tqd")]
+transform = Transform3D(0.661404, 0, -0.75003, 0, 1, 0, 0.75003, 0, 0.661404, 0, -1, -60.238)
+
+[node name="WoodenStakeRotate" type="Node3D" parent="pedestal3"]
+unique_name_in_owner = true
+
+[node name="wooden_stake" parent="pedestal3/WoodenStakeRotate" instance=ExtResource("8_cs362")]
+transform = Transform3D(0.501236, -0.310192, 0.111998, 0.310192, 0.37423, -0.351757, 0.111999, 0.351757, 0.472994, 0.177956, 0.65, -0.201801)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[editable path="acerola_logo"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cjjp4jyalnsfx"]
+[gd_scene load_steps=22 format=3 uid="uid://cjjp4jyalnsfx"]
 
 [ext_resource type="Shader" path="res://Shaders/ps1_postprocess.gdshader" id="1_su2gp"]
 [ext_resource type="PackedScene" uid="uid://cttqgfopdwiv" path="res://Scenes/player.tscn" id="2_ktwxo"]
@@ -7,35 +7,35 @@
 [ext_resource type="Texture2D" uid="uid://bv60nv6dgc4d8" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="5_sevgq"]
 [ext_resource type="PackedScene" uid="uid://cfgilkh2r3kxv" path="res://Scenes/pickup.tscn" id="6_a60k4"]
 [ext_resource type="Resource" uid="uid://ux3wm1vnteyh" path="res://Resources/WeaponResources/holy_book.tres" id="7_qnu40"]
+[ext_resource type="PackedScene" uid="uid://vikkvbptwe8m" path="res://Scenes/Enemies/bug.tscn" id="8_8wr2q"]
+[ext_resource type="PackedScene" uid="uid://ba64wyd6wbgyo" path="res://Scenes/Enemies/imp.tscn" id="9_goayf"]
 [ext_resource type="Resource" uid="uid://ddwgkdtgxf2ie" path="res://Resources/WeaponResources/wooden_stake.tres" id="9_oh5du"]
 [ext_resource type="PackedScene" uid="uid://g84m6pdvsd65" path="res://Scenes/Enemies/ghost.tscn" id="10_34ovo"]
 [ext_resource type="Resource" uid="uid://dd4685t15f3es" path="res://Resources/WeaponResources/ghost_trap.tres" id="10_x2jc3"]
-[ext_resource type="PackedScene" uid="uid://cvontqffavtmh" path="res://Assets/Blender/Enemies/imp1.blend" id="12_64kcw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nufya"]
+sky_top_color = Color(0.0823529, 0.0156863, 0.00784314, 1)
+sky_horizon_color = Color(0.411765, 0.141176, 0.160784, 1)
+ground_bottom_color = Color(0.0588235, 0.0431373, 0.0313726, 1)
+ground_horizon_color = Color(0.0196078, 0.0196078, 0.0235294, 1)
+
+[sub_resource type="Sky" id="Sky_1gkfa"]
+sky_material = SubResource("ProceduralSkyMaterial_nufya")
+
+[sub_resource type="Environment" id="Environment_axju6"]
+background_mode = 2
+sky = SubResource("Sky_1gkfa")
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l6bkl"]
 shader = ExtResource("1_su2gp")
 shader_parameter/change_color_depth = true
-shader_parameter/target_color_depth = 8
+shader_parameter/target_color_depth = 3
 shader_parameter/dithering = true
 shader_parameter/scale_resolution = true
-shader_parameter/target_resolution_scale = 3
+shader_parameter/target_resolution_scale = 5
 shader_parameter/enable_recolor = false
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6k0bi"]
-sky_top_color = Color(0.180392, 0.180392, 0.513726, 1)
-sky_horizon_color = Color(0.364706, 0.0823529, 0.239216, 1)
-sky_curve = 0.113679
-ground_bottom_color = Color(0, 0, 0, 1)
-ground_horizon_color = Color(0.294118, 0.105882, 0.352941, 1)
-
-[sub_resource type="Sky" id="Sky_do8xd"]
-sky_material = SubResource("ProceduralSkyMaterial_6k0bi")
-
-[sub_resource type="Environment" id="Environment_gmkk3"]
-background_mode = 2
-sky = SubResource("Sky_do8xd")
-tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_p85nw"]
 
@@ -52,15 +52,20 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Arr
 albedo_texture = ExtResource("5_sevgq")
 uv1_triplanar = true
 
-[node name="Node3D" type="Node3D"]
+[node name="test" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_axju6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.984808, 0.0307504, -0.170904, 0, 0.984196, 0.177085, 0.173648, -0.174394, 0.969243, 0, 0, 0)
+shadow_enabled = true
 
 [node name="Misc" type="Node" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="Misc"]
-visible = false
 top_level = true
-light_mask = 7
-visibility_layer = 1023
+light_mask = 0
 material = SubResource("ShaderMaterial_l6bkl")
 offset_right = 1152.0
 offset_bottom = 648.0
@@ -73,18 +78,6 @@ offset_top = 539.0
 offset_right = 78.0
 offset_bottom = -109.0
 scale = Vector2(0.8, 0.8)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Misc"]
-environment = SubResource("Environment_gmkk3")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Misc"]
-transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-shadow_enabled = true
-
-[node name="Player" parent="." instance=ExtResource("2_ktwxo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
-run_time_data = ExtResource("3_pvpn5")
-_speed = 12.0
 
 [node name="PickUps" type="Node" parent="."]
 
@@ -112,12 +105,19 @@ shape = SubResource("SphereShape3D_bdkqc")
 
 [node name="Enemies" type="Node" parent="."]
 
-[node name="imp1" parent="Enemies" instance=ExtResource("12_64kcw")]
-transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 5.31311, 0.5, 0.875439)
+[node name="Imp" parent="Enemies" instance=ExtResource("9_goayf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 0)
 
 [node name="Ghost" parent="Enemies" instance=ExtResource("10_34ovo")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 41)
-_speed = 8.0
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, -0.4, 13.5767)
+
+[node name="Bug" parent="Enemies" instance=ExtResource("8_8wr2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7406, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_ktwxo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.3495, -0.0294533, -6.97723)
+run_time_data = ExtResource("3_pvpn5")
+_speed = 10.0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_s7xr0")

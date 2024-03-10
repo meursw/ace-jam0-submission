@@ -11,6 +11,9 @@ extends CharacterBody3D
 @export var _speed := 5.0
 @export var _gravity := 9.8
 @export var _mouse_sens := 0.1
+@export_category("Enemy Components")
+@export var hurtbox_component: HurtboxComponent
+@export var health_component: HealthComponent
 
 var inventory: Inventory = Inventory.new()
 

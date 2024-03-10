@@ -1,13 +1,99 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbfhm5a3h3qgj"]
+[gd_scene load_steps=11 format=3 uid="uid://bbfhm5a3h3qgj"]
 
 [ext_resource type="Script" path="res://Scripts/base_enemy.gd" id="1_pf22u"]
+[ext_resource type="Script" path="res://Components/health_component.gd" id="2_vy6x5"]
+[ext_resource type="Script" path="res://Components/hurt_component.gd" id="3_d2oyg"]
+[ext_resource type="Script" path="res://Components/destroy_component.gd" id="4_4l7ac"]
+[ext_resource type="Script" path="res://Components/hitbox_component.gd" id="4_xdcqf"]
+[ext_resource type="Script" path="res://Components/hurtbox_component.gd" id="5_asgaw"]
+[ext_resource type="Script" path="res://Components/shake_component.gd" id="5_s62yo"]
 
-[node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent")]
+[sub_resource type="Animation" id="Animation_lq3hn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u3g5f"]
+resource_name = "shrink_death"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_clq2n"]
+_data = {
+"RESET": SubResource("Animation_lq3hn"),
+"shrink_death": SubResource("Animation_u3g5f")
+}
+
+[node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "animation_player", "hurtbox_component", "hitbox_component", "health_component", "shake_component")]
 script = ExtResource("1_pf22u")
 nav_agent = NodePath("NavigationAgent3D")
+animation_player = NodePath("AnimationPlayer")
+hurtbox_component = NodePath("HurtboxComponent")
+hitbox_component = NodePath("HitboxComponent")
+health_component = NodePath("HealthComponent")
+shake_component = NodePath("ShakeComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_clq2n")
+}
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_vy6x5")
+
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("health_comp", "hurtbox_comp")]
+script = ExtResource("3_d2oyg")
+health_comp = NodePath("../HealthComponent")
+hurtbox_comp = NodePath("../HurtboxComponent")
+
+[node name="DestroyComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "health_comp")]
+script = ExtResource("4_4l7ac")
+actor = NodePath("..")
+health_comp = NodePath("../HealthComponent")
+
+[node name="ShakeComponent" type="Node" parent="."]
+script = ExtResource("5_s62yo")
+shake_amount = 0.2
+shake_duration = 0.2
+
+[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("timer")]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("4_xdcqf")
+timer = NodePath("AttackSpeedTimer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
+
+[node name="AttackSpeedTimer" type="Timer" parent="HitboxComponent"]
+wait_time = 0.2
+one_shot = true
+
+[node name="HurtboxComponent" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("5_asgaw")

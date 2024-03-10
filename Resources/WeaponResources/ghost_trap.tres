@@ -1,15 +1,14 @@
 [gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dd4685t15f3es"]
 
-[ext_resource type="Texture2D" uid="uid://2kcditnog3ak" path="res://Assets/Weapon Icons/ghost_trap_icon.png" id="1_rsdgf"]
+[ext_resource type="Texture2D" uid="uid://djks4nn1u7rg2" path="res://Assets/Weapon Icons/ghost_trap_icon.png" id="1_rsdgf"]
 [ext_resource type="Script" path="res://Resources/ResScripts/weapon_res.gd" id="1_tn0rm"]
-[ext_resource type="PackedScene" uid="uid://c4gyvwmhn2fcv" path="res://Assets/Blender/WeaponAssets/ghost_trap.blend" id="2_ri01w"]
+[ext_resource type="PackedScene" uid="uid://b2es3qxngmbop" path="res://Assets/Blender/WeaponAssets/ghost_trap_pickup.tscn" id="2_c2d1l"]
 
 [resource]
 script = ExtResource("1_tn0rm")
 position = Vector3(0.6, -0.6, -0.8)
 rotation = Vector3(-10, 0, 0)
 weapon_type = 2
-damage = 0
 name = "Ghost Trap"
-scene = ExtResource("2_ri01w")
+scene = ExtResource("2_c2d1l")
 icon = ExtResource("1_rsdgf")

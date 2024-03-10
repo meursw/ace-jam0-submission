@@ -1,0 +1,158 @@
+[gd_scene load_steps=12 format=3 uid="uid://b2es3qxngmbop"]
+
+[ext_resource type="PackedScene" uid="uid://c4gyvwmhn2fcv" path="res://Assets/Blender/WeaponAssets/ghost_trap.blend" id="1_iw581"]
+[ext_resource type="Shader" uid="uid://b7gpt40523pjs" path="res://Shaders/ghost_trap.tres" id="2_2ua4c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u8iic"]
+albedo_color = Color(0.160784, 0.0235294, 0.156863, 1)
+metallic = 0.7
+roughness = 0.56
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xp4d4"]
+render_priority = 0
+shader = ExtResource("2_2ua4c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnhq1"]
+transparency = 1
+blend_mode = 2
+emission_enabled = true
+emission = Color(0.407843, 0.0980392, 0.101961, 1)
+emission_energy_multiplier = 7.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6hwhc"]
+render_priority = 0
+shader = ExtResource("2_2ua4c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkc16"]
+render_priority = 0
+shader = ExtResource("2_2ua4c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xo4cc"]
+render_priority = 0
+shader = ExtResource("2_2ua4c")
+
+[sub_resource type="Animation" id="Animation_pbltl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icosphere_002:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icosphere_007:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.767119, 1.83958, 0.188903)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Icosphere_003:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dt2bf"]
+resource_name = "spin_rings"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icosphere_002:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 6.28319)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icosphere_007:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.767119, 1.83958, 0.188903), Vector3(0.767945, 8.12276, 0.188496)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Icosphere_003:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0), Vector3(5.49779, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bvecy"]
+_data = {
+"RESET": SubResource("Animation_pbltl"),
+"spin_rings": SubResource("Animation_dt2bf")
+}
+
+[node name="ghost_trap" instance=ExtResource("1_iw581")]
+
+[node name="Cube" parent="." index="0"]
+layers = 3
+material_override = SubResource("StandardMaterial3D_u8iic")
+
+[node name="Icosphere" parent="." index="1"]
+layers = 3
+material_override = SubResource("ShaderMaterial_xp4d4")
+material_overlay = SubResource("StandardMaterial3D_vnhq1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Icosphere" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0502579, 0)
+light_color = Color(1, 0.403922, 0.329412, 1)
+light_energy = 2.539
+light_negative = true
+light_specular = 3.577
+omni_range = 0.383
+omni_attenuation = 2.29739
+
+[node name="Icosphere_002" parent="." index="2"]
+layers = 3
+material_override = SubResource("ShaderMaterial_6hwhc")
+
+[node name="Icosphere_007" parent="." index="3"]
+transform = Transform3D(-0.0966772, 0.505696, 0.496368, 0.0966802, 0.505696, -0.496368, -0.701971, 2.13135e-06, -0.136724, 0, 0.306571, 0)
+layers = 3
+material_override = SubResource("ShaderMaterial_kkc16")
+
+[node name="Icosphere_003" parent="." index="4"]
+transform = Transform3D(0.778571, 0, 0, 0, 0.550533, 0.550533, 0, -0.550533, 0.550533, 0, 0.306571, 0)
+layers = 3
+material_override = SubResource("ShaderMaterial_xo4cc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_bvecy")
+}
+autoplay = "spin_rings"

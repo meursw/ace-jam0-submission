@@ -1,15 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://dno3u0c5ujo2c"]
 
 [ext_resource type="Script" path="res://Scripts/item_slot.gd" id="1_3ruaj"]
-[ext_resource type="Texture2D" uid="uid://cm6rb74roaedg" path="res://Assets/Weapon Icons/wooden_stake_icon.png" id="2_bp4mq"]
 
-[node name="PanelContainer" type="PanelContainer" node_paths=PackedStringArray("texture_rect")]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4fp1i"]
+load_path = "res://.godot/imported/wooden_stake_icon.png-f306573f3f61df3a32b66a00fad74791.ctex"
+
+[node name="TextureRect" type="TextureRect"]
 custom_minimum_size = Vector2(128, 128)
-script = ExtResource("1_3ruaj")
-texture_rect = NodePath("TextureRect")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 2
-texture = ExtResource("2_bp4mq")
+texture = SubResource("CompressedTexture2D_4fp1i")
 expand_mode = 1
 stretch_mode = 5
+script = ExtResource("1_3ruaj")
