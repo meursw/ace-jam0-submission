@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bneleiyvj0xdk"]
+
+[ext_resource type="Shader" uid="uid://dv1j8uutuhy77" path="res://Shaders/imp_attack.tres" id="1_fnqn7"]
+[ext_resource type="Script" path="res://imp_attack.gd" id="2_4lyj3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o24b0"]
+shader = ExtResource("1_fnqn7")
+
+[node name="ColorRect" type="ColorRect" groups=["imp_attack"]]
+material = SubResource("ShaderMaterial_o24b0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 324)
+script = ExtResource("2_4lyj3")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://g84m6pdvsd65"]
+[gd_scene load_steps=37 format=3 uid="uid://g84m6pdvsd65"]
 
 [ext_resource type="Script" path="res://Scripts/ghost.gd" id="2_r7hg1"]
 [ext_resource type="Texture2D" uid="uid://dkwjnllo2kp1l" path="res://Assets/Blender/WeaponAssets/textures/colour pallette.png" id="3_gp2ci"]
@@ -281,7 +281,6 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_ax20b"]
 resource_name = "attack"
-loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -379,11 +378,35 @@ _data = {
 "move": SubResource("Animation_by3s3")
 }
 
-[node name="Ghost" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "animation_player", "hurtbox_component", "hitbox_component")]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6rmmg"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ycl32"]
+animation = &"move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7id6j"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ktrqa"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o3qig"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4ild8"]
+states/Start/position = Vector2(206, 108)
+states/attack/node = SubResource("AnimationNodeAnimation_6rmmg")
+states/attack/position = Vector2(574, 100)
+states/move/node = SubResource("AnimationNodeAnimation_ycl32")
+states/move/position = Vector2(383, 100)
+transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_7id6j"), "move", "attack", SubResource("AnimationNodeStateMachineTransition_ktrqa"), "attack", "move", SubResource("AnimationNodeStateMachineTransition_o3qig")]
+
+[node name="Ghost" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "animation_player", "animation_tree", "hurtbox_component", "hitbox_component")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 script = ExtResource("2_r7hg1")
 nav_agent = NodePath("NavigationAgent3D")
 animation_player = NodePath("GhostAnimations")
+animation_tree = NodePath("AnimationTree")
 hurtbox_component = NodePath("HurtboxComponent")
 hitbox_component = NodePath("HitboxComponent")
 
@@ -443,6 +466,7 @@ health_comp = NodePath("../HealthComponent")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 collision_layer = 8
 collision_mask = 4
+monitoring = false
 script = ExtResource("8_ft5gt")
 timer = NodePath("AttackSpeedTimer")
 
@@ -468,3 +492,10 @@ libraries = {
 "": SubResource("AnimationLibrary_7egdv")
 }
 autoplay = "move"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7egdv")
+}
+tree_root = SubResource("AnimationNodeStateMachine_4ild8")
+anim_player = NodePath("../GhostAnimations")

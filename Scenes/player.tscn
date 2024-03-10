@@ -46,6 +46,13 @@ collide_with_bodies = false
 script = ExtResource("2_tawb1")
 weapon_array = Array[PackedScene]([ExtResource("3_4ww8v"), ExtResource("3_k4qh5"), ExtResource("9_i2t8l")])
 
+[node name="OmniLight3D" type="OmniLight3D" parent="MainCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0607672, -0.896276)
+light_color = Color(0.847059, 0.847059, 0.847059, 1)
+light_energy = 3.723
+omni_range = 0.482
+omni_attenuation = 1.03526
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_e5sv4")

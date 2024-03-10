@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Components/hurtbox_component.gd" id="5_asgaw"]
 [ext_resource type="Script" path="res://Components/shake_component.gd" id="5_s62yo"]
 
-[sub_resource type="Animation" id="Animation_lq3hn"]
+[sub_resource type="Animation" id="Animation_6tuvu"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -23,7 +23,7 @@ tracks/0/keys = {
 "values": [Vector3(1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_u3g5f"]
+[sub_resource type="Animation" id="Animation_ebh8q"]
 resource_name = "shrink_death"
 length = 0.3
 tracks/0/type = "value"
@@ -39,10 +39,10 @@ tracks/0/keys = {
 "values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_clq2n"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5samf"]
 _data = {
-"RESET": SubResource("Animation_lq3hn"),
-"shrink_death": SubResource("Animation_u3g5f")
+"RESET": SubResource("Animation_6tuvu"),
+"shrink_death": SubResource("Animation_ebh8q")
 }
 
 [node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "animation_player", "hurtbox_component", "hitbox_component", "health_component", "shake_component")]
@@ -60,7 +60,7 @@ shake_component = NodePath("ShakeComponent")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_clq2n")
+"": SubResource("AnimationLibrary_5samf")
 }
 
 [node name="HealthComponent" type="Node" parent="."]

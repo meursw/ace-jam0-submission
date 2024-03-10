@@ -1,0 +1,60 @@
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://dv1j8uutuhy77"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hwdv3"]
+noise_type = 2
+seed = 2215
+frequency = 0.0105
+fractal_type = 2
+fractal_lacunarity = 2.025
+fractal_gain = 0.71
+fractal_weighted_strength = 0.2
+cellular_distance_function = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jy7mr"]
+noise = SubResource("FastNoiseLite_hwdv3")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ui5r5"]
+texture = SubResource("NoiseTexture2D_jy7mr")
+
+[sub_resource type="Gradient" id="Gradient_sj3qr"]
+offsets = PackedFloat32Array(0.28125, 0.325, 0.7125)
+colors = PackedColorArray(0, 0, 0, 0, 0, 1, 0, 1, 0, 0.2, 0, 0.2)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xung0"]
+gradient = SubResource("Gradient_sj3qr")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_qtc3y"]
+texture = SubResource("GradientTexture1D_xung0")
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D tex_frg_2;
+uniform sampler2D tex_frg_4;
+
+
+
+void fragment() {
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_frg_2, UV);
+
+
+// Texture2D:4
+	vec4 n_out4p0 = texture(tex_frg_4, vec2(n_out2p0.xy));
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out4p0.xyz);
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(1180, 80)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_ui5r5")
+nodes/fragment/2/position = Vector2(680, 100)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_qtc3y")
+nodes/fragment/4/position = Vector2(900, 120)
+nodes/fragment/connections = PackedInt32Array(4, 0, 0, 0, 2, 0, 4, 0)

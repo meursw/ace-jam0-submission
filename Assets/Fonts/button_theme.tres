@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://uioj00l45c7r"]
+
+[ext_resource type="FontFile" uid="uid://b388nkoubou0m" path="res://Assets/Fonts/CINZEL-BOLD.TTF" id="1_d0myi"]
+
+[resource]
+default_font = ExtResource("1_d0myi")
+default_font_size = 22
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(0.823529, 0.192157, 0.235294, 1)

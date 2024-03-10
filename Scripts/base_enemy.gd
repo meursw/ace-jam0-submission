@@ -7,7 +7,7 @@ extends CharacterBody3D
 @export_category("Enemy Params")
 @export var _speed := 2.0
 @export var _aggro_range := 10.0
-@export var _attack_range := 1.0
+@export var _attack_range := 1.7
 @export_category("Enemy Components")
 @export var hurtbox_component: HurtboxComponent
 @export var hitbox_component: HitboxComponent
@@ -17,6 +17,7 @@ extends CharacterBody3D
 var player
 var provoked := false
 var can_attack := false
+var distance
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
@@ -37,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		var next_position = nav_agent.get_next_path_position()
 		
 		var direction = global_position.direction_to(next_position)
-		var distance = global_position.distance_to(player.global_position)
+		distance = global_position.distance_to(player.global_position)
 		
 		if distance <= _aggro_range:
 			provoked = true

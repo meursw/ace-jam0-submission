@@ -3,11 +3,13 @@ extends CharacterBody3D
 
 @export var nav_agent: NavigationAgent3D
 @export var animation_player: AnimationPlayer
+@export var animation_tree: AnimationTree
+@onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
 
 @export_category("Enemy Params")
 @export var _speed := 2.0
 @export var _aggro_range := 10.0
-@export var _attack_range := 1.0
+@export var _attack_range := 2.0
 @export_category("Enemy Components")
 @export var hurtbox_component: HurtboxComponent
 @export var hitbox_component: HitboxComponent
@@ -22,9 +24,9 @@ func _ready():
 		player = null
 	)
 		
-	hitbox_component.area_entered.connect(func(area: Area3D):
-		animation_player.play("attack")
-	)
+	#hitbox_component.area_entered.connect(func(area: Area3D):
+	#	playback.travel("attack")
+	#)
 	
 
 func _process(delta):
@@ -41,9 +43,8 @@ func _physics_process(delta: float) -> void:
 		if distance <= _aggro_range:
 			provoked = true
 		
-		if provoked:
-			if distance <= _attack_range:
-				animation_player.play("attack")
+		if distance <= _attack_range:
+			playback.travel("attack")
 		
 		if direction:
 			look_at_target(direction)
