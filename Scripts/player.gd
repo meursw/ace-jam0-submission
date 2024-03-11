@@ -5,15 +5,15 @@ extends CharacterBody3D
 @export_subgroup("Player Nodes")
 @export var _camera_3d: Camera3D
 @export var weapon_handler: Node3D
+@export var damage_texture_regular: TextureRect
+@export var damage_texture_vomit: TextureRect
 @export_subgroup("Player Resources")
 @export var run_time_data: RunTimeData
 @export_subgroup("Player Variables")
 @export var _speed := 5.0
 @export var _gravity := 9.8
 @export var _mouse_sens := 0.1
-@export_category("Enemy Components")
-@export var hurtbox_component: HurtboxComponent
-@export var health_component: HealthComponent
+
 
 var inventory: Inventory = Inventory.new()
 

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AceJam0-Submission"
-run/main_scene="res://Levels/test.tscn"
+run/main_scene="res://Levels/StartScene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/image="res://72d8ND.png"
 config/icon="res://72d8ND.png"
@@ -23,6 +23,9 @@ GameEvents="*res://Singletons/game_events.gd"
 
 [display]
 
+window/size/viewport_width=800
+window/size/viewport_height=600
+window/size/mode=3
 window/size/always_on_top=true
 window/stretch/mode="viewport"
 

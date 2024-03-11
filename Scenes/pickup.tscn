@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfgilkh2r3kxv"]
+[gd_scene load_steps=3 format=3 uid="uid://cfgilkh2r3kxv"]
 
 [ext_resource type="Script" path="res://Scripts/pickup.gd" id="1_5ufyl"]
+[ext_resource type="FontFile" uid="uid://b388nkoubou0m" path="res://Assets/Fonts/CINZEL-BOLD.TTF" id="2_tf1la"]
 
 [node name="Pickup" type="Area3D" node_paths=PackedStringArray("label")]
 collision_layer = 2
@@ -22,3 +23,4 @@ offset_right = 34.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_tf1la")

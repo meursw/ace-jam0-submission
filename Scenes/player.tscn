@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cttqgfopdwiv"]
+[gd_scene load_steps=15 format=3 uid="uid://cttqgfopdwiv"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_n2r3j"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="2_rtkwi"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b8axe5s63huta" path="res://Scenes/Weapons/wooden_stake.tscn" id="3_4ww8v"]
 [ext_resource type="PackedScene" uid="uid://c82ayaxnwv2l0" path="res://Scenes/Weapons/holy_book.tscn" id="3_k4qh5"]
 [ext_resource type="Script" path="res://Components/health_component.gd" id="7_8knd6"]
+[ext_resource type="Texture2D" uid="uid://box6htokx0hor" path="res://Assets/Misc/damage_texture.png" id="7_w8djj"]
+[ext_resource type="Texture2D" uid="uid://da4en648nvplm" path="res://Assets/Misc/vomit_damage_texture.png" id="8_0i8og"]
 [ext_resource type="Script" path="res://Components/hurt_component.gd" id="8_g3lh2"]
 [ext_resource type="Script" path="res://Components/destroy_component.gd" id="9_20rbu"]
 [ext_resource type="Script" path="res://Components/hurtbox_component.gd" id="9_73xhr"]
@@ -16,13 +18,13 @@ radius = 0.61
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e5sv4"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_camera_3d", "weapon_handler", "hurtbox_component", "health_component") groups=["player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_camera_3d", "weapon_handler", "damage_texture_regular", "damage_texture_vomit") groups=["player"]]
 collision_layer = 5
 script = ExtResource("1_n2r3j")
 _camera_3d = NodePath("MainCamera")
 weapon_handler = NodePath("MainCamera/WeaponHandler")
-hurtbox_component = NodePath("HurtboxComponent")
-health_component = NodePath("HealthComponent")
+damage_texture_regular = NodePath("MainCamera/DamageRegular")
+damage_texture_vomit = NodePath("MainCamera/DamageVomit")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -46,12 +48,25 @@ collide_with_bodies = false
 script = ExtResource("2_tawb1")
 weapon_array = Array[PackedScene]([ExtResource("3_4ww8v"), ExtResource("3_k4qh5"), ExtResource("9_i2t8l")])
 
-[node name="OmniLight3D" type="OmniLight3D" parent="MainCamera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0607672, -0.896276)
-light_color = Color(0.847059, 0.847059, 0.847059, 1)
-light_energy = 3.723
-omni_range = 0.482
-omni_attenuation = 1.03526
+[node name="DamageRegular" type="TextureRect" parent="MainCamera"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 324)
+texture = ExtResource("7_w8djj")
+
+[node name="DamageVomit" type="TextureRect" parent="MainCamera"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 324)
+texture = ExtResource("8_0i8og")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
