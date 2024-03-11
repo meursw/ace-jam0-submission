@@ -8,8 +8,9 @@ extends CharacterBody3D
 
 @export_category("Enemy Params")
 @export var _speed := 2.0
-@export var _aggro_range := 10.0
+@export var _aggro_range := 800.0
 @export var _attack_range := 2.9
+@export var _gravity := 9.8
 @export_category("Enemy Components")
 @export var hurtbox_component: HurtboxComponent
 @export var hitbox_component: HitboxComponent
@@ -34,6 +35,9 @@ func _process(delta):
 		nav_agent.target_position = player.global_position
 
 func _physics_process(delta: float) -> void:
+	if not is_on_floor():
+		velocity.y -= _gravity * delta
+	
 	if player: #check if there is a player to chase
 		var next_position = nav_agent.get_next_path_position()
 		

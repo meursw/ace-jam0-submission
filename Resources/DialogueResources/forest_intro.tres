@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=2 format=3 uid="uid://bul3v74hq8e2u"]
+
+[ext_resource type="Script" path="res://Resources/ResScripts/dialogue.gd" id="1_xy1dn"]
+
+[resource]
+script = ExtResource("1_xy1dn")
+dialogue = Array[String](["Pick up the wooden stake and.. do what comes natural."])

@@ -18,7 +18,7 @@ shader_parameter/change_color_depth = true
 shader_parameter/target_color_depth = 3
 shader_parameter/dithering = true
 shader_parameter/scale_resolution = true
-shader_parameter/target_resolution_scale = 3
+shader_parameter/target_resolution_scale = 2
 shader_parameter/enable_recolor = false
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7beqf"]
@@ -52,6 +52,7 @@ light_mask = 0
 material = SubResource("ShaderMaterial_toh8c")
 offset_right = 1630.0
 offset_bottom = 1009.0
+metadata/_edit_use_anchors_ = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0bitv")
@@ -62,25 +63,50 @@ shadow_enabled = true
 [node name="Camera3D" type="Camera3D" parent="."]
 fov = 2.0
 
-[node name="acerola_logo" parent="." instance=ExtResource("1_aaiod")]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.3, -0.155, -10)
-script = ExtResource("2_m07sj")
+[node name="Labels" type="Node" parent="."]
 
-[node name="Plane_001" parent="acerola_logo" index="0"]
-transform = Transform3D(8.21831, 0, 0, 0, -1.1369e-07, -2.60092, 0, 2.60092, -1.1369e-07, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_5dnrp")
-
-[node name="Title" type="Label3D" parent="."]
+[node name="Title" type="Label3D" parent="Labels"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.8571, -3070.14)
 pixel_size = 0.25
-modulate = Color(1, 0.992157, 1, 1)
+modulate = Color(0.980392, 0.25098, 0.313726, 1)
 text = "BIRTH BY TRIAL"
 font = ExtResource("5_4m8dr")
 font_size = 37
 outline_size = 17
 
+[node name="Instructions" type="Label3D" parent="Labels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.026, 9.239, -3070.14)
+pixel_size = 0.25
+modulate = Color(0.592157, 0.941176, 0.619608, 1)
+text = "[ F11 ] 
+Adjust screen
+
+[ LMB ]
+progress dialogue
+
+[ ENTER ] 
+skip dialogue"
+font = ExtResource("5_4m8dr")
+font_size = 12
+
+[node name="MovementInstructions" type="Label3D" parent="Labels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.939, 12.363, -3070.14)
+pixel_size = 0.25
+modulate = Color(0.592157, 0.941176, 0.619608, 1)
+text = "[ WASD ] 
+move
+
+[ LMB ] 
+use weapon
+
+[ ESC ]
+pause
+"
+font = ExtResource("5_4m8dr")
+font_size = 12
+
 [node name="pedestal" parent="." instance=ExtResource("6_m8tqd")]
-transform = Transform3D(0.661404, 0, -0.75003, 0, 1, 0, 0.75003, 0, 0.661404, -1, -1, -60.238)
+transform = Transform3D(0.529123, 0, -0.600024, 0, 0.8, 0, 0.600024, 0, 0.529123, -1, -1, -60.238)
 
 [node name="holy_book" parent="pedestal" instance=ExtResource("7_8fgtk")]
 unique_name_in_owner = true
@@ -92,13 +118,13 @@ light_color = Color(0.909804, 0.94902, 0.564706, 1)
 light_energy = 13.767
 light_indirect_energy = 9.341
 light_volumetric_fog_energy = 0.335
-spot_range = 0.915
+spot_range = 0.720149
 spot_attenuation = 0.840897
-spot_angle = 18.19
+spot_angle = 15.0243
 spot_angle_attenuation = 1.93187
 
 [node name="pedestal2" parent="." instance=ExtResource("6_m8tqd")]
-transform = Transform3D(0.661404, 0, -0.75003, 0, 1, 0, 0.75003, 0, 0.661404, 1, -1, -60.238)
+transform = Transform3D(0.529123, 0, -0.600024, 0, 0.8, 0, 0.600024, 0, 0.529123, 1, -1, -60.238)
 
 [node name="ghost_trap" parent="pedestal2" instance=ExtResource("9_37f67")]
 unique_name_in_owner = true
@@ -116,7 +142,7 @@ spot_angle = 18.19
 spot_angle_attenuation = 1.93187
 
 [node name="pedestal3" parent="." instance=ExtResource("6_m8tqd")]
-transform = Transform3D(0.661404, 0, -0.75003, 0, 1, 0, 0.75003, 0, 0.661404, 0, -1, -60.238)
+transform = Transform3D(0.529123, 0, -0.600024, 0, 0.8, 0, 0.600024, 0, 0.529123, 0, -1, -60.238)
 
 [node name="WoodenStakeRotate" type="Node3D" parent="pedestal3"]
 unique_name_in_owner = true
@@ -124,15 +150,16 @@ unique_name_in_owner = true
 [node name="wooden_stake" parent="pedestal3/WoodenStakeRotate" instance=ExtResource("8_cs362")]
 transform = Transform3D(0.501236, -0.310192, 0.111998, 0.310192, 0.37423, -0.351757, 0.111999, 0.351757, 0.472994, 0.177956, 0.65, -0.201801)
 
-[node name="Control" type="Control" parent="."]
+[node name="Start" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="CenterContainer" type="CenterContainer" parent="Control"]
+[node name="CenterContainer" type="CenterContainer" parent="Start"]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -143,11 +170,11 @@ offset_right = 43.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Start/CenterContainer"]
 custom_minimum_size = Vector2(0, 356)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="Start/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -155,6 +182,14 @@ theme = ExtResource("11_wngph")
 text = "BEGIN
 EVULATION"
 
-[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[node name="acerola_logo" parent="." instance=ExtResource("1_aaiod")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.3, -0.155, -10)
+script = ExtResource("2_m07sj")
+
+[node name="Plane_001" parent="acerola_logo" index="0"]
+transform = Transform3D(8.21831, 0, 0, 0, -1.1369e-07, -2.60092, 0, 2.60092, -1.1369e-07, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_5dnrp")
+
+[connection signal="pressed" from="Start/CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
 
 [editable path="acerola_logo"]

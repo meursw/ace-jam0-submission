@@ -8,7 +8,7 @@ func _ready():
 	hurtbox_comp.hurt.connect(func(hitbox: HitboxComponent): 
 		health_comp.health -= hitbox.damage
 		
-		if get_parent() is Player:
+		if get_parent() is Player and health_comp.health > 0:
 			var damage_texture: TextureRect
 			if hitbox.get_parent() is Imp:
 				damage_texture = get_parent().damage_texture_vomit

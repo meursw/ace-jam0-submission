@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://cttqgfopdwiv"]
+[gd_scene load_steps=18 format=3 uid="uid://cttqgfopdwiv"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_n2r3j"]
+[ext_resource type="Resource" uid="uid://cf8j54goebfk0" path="res://Resources/run_time_data.tres" id="2_nvhts"]
 [ext_resource type="Script" path="res://Scripts/camera.gd" id="2_rtkwi"]
 [ext_resource type="Script" path="res://Scripts/weapon_handler.gd" id="2_tawb1"]
 [ext_resource type="PackedScene" uid="uid://b8axe5s63huta" path="res://Scenes/Weapons/wooden_stake.tscn" id="3_4ww8v"]
@@ -12,21 +13,43 @@
 [ext_resource type="Script" path="res://Components/destroy_component.gd" id="9_20rbu"]
 [ext_resource type="Script" path="res://Components/hurtbox_component.gd" id="9_73xhr"]
 [ext_resource type="PackedScene" uid="uid://mb1u55xw5fle" path="res://Scenes/Weapons/ghost_trap.tscn" id="9_i2t8l"]
+[ext_resource type="Script" path="res://Components/shake_component.gd" id="13_4oxi5"]
+[ext_resource type="Texture2D" uid="uid://dvbfp8c2lrki" path="res://Assets/Misc/health_bar_full.png" id="14_l4do6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_it3ul"]
 radius = 0.61
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e5sv4"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_camera_3d", "weapon_handler", "damage_texture_regular", "damage_texture_vomit") groups=["player"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_camera_3d", "weapon_handler", "damage_texture_regular", "damage_texture_vomit", "health_component", "shake_component", "health_bar") groups=["player"]]
 collision_layer = 5
 script = ExtResource("1_n2r3j")
 _camera_3d = NodePath("MainCamera")
 weapon_handler = NodePath("MainCamera/WeaponHandler")
 damage_texture_regular = NodePath("MainCamera/DamageRegular")
 damage_texture_vomit = NodePath("MainCamera/DamageVomit")
+health_component = NodePath("HealthComponent")
+shake_component = NodePath("ShakeComponent")
+health_bar = NodePath("HUD/HealthBar")
+run_time_data = ExtResource("2_nvhts")
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -27.0
+offset_top = 53.0
+offset_right = 13.0
+offset_bottom = 93.0
+grow_horizontal = 0
+scale = Vector2(1.535, 1.535)
+pivot_offset = Vector2(20, 20)
+
+[node name="HealthBar" type="Sprite2D" parent="HUD"]
+scale = Vector2(0.540322, 0.540322)
+texture = ExtResource("14_l4do6")
+hframes = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -48,16 +71,6 @@ collide_with_bodies = false
 script = ExtResource("2_tawb1")
 weapon_array = Array[PackedScene]([ExtResource("3_4ww8v"), ExtResource("3_k4qh5"), ExtResource("9_i2t8l")])
 
-[node name="DamageRegular" type="TextureRect" parent="MainCamera"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(576, 324)
-texture = ExtResource("7_w8djj")
-
 [node name="DamageVomit" type="TextureRect" parent="MainCamera"]
 visible = false
 anchors_preset = 15
@@ -68,13 +81,24 @@ grow_vertical = 2
 pivot_offset = Vector2(576, 324)
 texture = ExtResource("8_0i8og")
 
+[node name="DamageRegular" type="TextureRect" parent="MainCamera"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 324)
+texture = ExtResource("7_w8djj")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_e5sv4")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("7_8knd6")
-health = 100
+health = 5
 
 [node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("health_comp", "hurtbox_comp")]
 script = ExtResource("8_g3lh2")
@@ -85,6 +109,11 @@ hurtbox_comp = NodePath("../HurtboxComponent")
 script = ExtResource("9_20rbu")
 actor = NodePath("..")
 health_comp = NodePath("../HealthComponent")
+
+[node name="ShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
+script = ExtResource("13_4oxi5")
+node = NodePath("../HUD/HealthBar")
+shake_amount = 4.0
 
 [node name="HurtboxComponent" type="Area3D" parent="."]
 collision_layer = 4

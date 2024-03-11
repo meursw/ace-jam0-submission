@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://brdje2tmhqpmr"]
+
+[ext_resource type="Shader" path="res://Shaders/ps1_postprocess.gdshader" id="1_wkrkh"]
+[ext_resource type="PackedScene" uid="uid://cs7m78tstb6od" path="res://Scenes/UI/ui.tscn" id="2_8g8kr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cvu6m"]
+shader = ExtResource("1_wkrkh")
+shader_parameter/change_color_depth = true
+shader_parameter/target_color_depth = 3
+shader_parameter/dithering = true
+shader_parameter/scale_resolution = true
+shader_parameter/target_resolution_scale = 3
+shader_parameter/enable_recolor = false
+
+[node name="UI-HUD" type="Node"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+top_level = true
+light_mask = 0
+material = SubResource("ShaderMaterial_cvu6m")
+offset_right = 800.0
+offset_bottom = 603.0
+
+[node name="UI" parent="." instance=ExtResource("2_8g8kr")]
+
+[node name="DialogueUI" parent="UI" index="0"]
+offset_left = 171.0
+offset_top = -437.0
+offset_right = 171.0
+offset_bottom = -437.0
+
+[node name="Label" parent="UI/DialogueUI/DialogueBG" index="0"]
+offset_left = -43.0
+offset_top = 412.0
+offset_right = 85.0
+offset_bottom = 412.0
+
+[node name="InventoryUI" parent="UI" index="1"]
+offset_left = 564.0
+offset_top = 517.0
+offset_right = 156.0
+offset_bottom = -83.0
+scale = Vector2(0.6, 0.6)
+
+[editable path="UI"]

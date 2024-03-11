@@ -1,8 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://cjjp4jyalnsfx"]
+[gd_scene load_steps=21 format=3 uid="uid://cjjp4jyalnsfx"]
 
 [ext_resource type="Shader" path="res://Shaders/ps1_postprocess.gdshader" id="1_su2gp"]
 [ext_resource type="PackedScene" uid="uid://cttqgfopdwiv" path="res://Scenes/player.tscn" id="2_ktwxo"]
-[ext_resource type="Resource" uid="uid://cf8j54goebfk0" path="res://Resources/run_time_data.tres" id="3_pvpn5"]
 [ext_resource type="PackedScene" uid="uid://cs7m78tstb6od" path="res://Scenes/UI/ui.tscn" id="4_ghlyx"]
 [ext_resource type="Texture2D" uid="uid://bv60nv6dgc4d8" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="5_sevgq"]
 [ext_resource type="PackedScene" uid="uid://cfgilkh2r3kxv" path="res://Scenes/pickup.tscn" id="6_a60k4"]
@@ -61,30 +60,30 @@ environment = SubResource("Environment_axju6")
 transform = Transform3D(0.984808, 0.0307504, -0.170904, 0, 0.984196, 0.177085, 0.173648, -0.174394, 0.969243, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Misc" type="Node" parent="."]
+[node name="UI-HUD" type="Node" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="Misc"]
+[node name="ColorRect" type="ColorRect" parent="UI-HUD"]
 top_level = true
 light_mask = 0
 material = SubResource("ShaderMaterial_l6bkl")
 offset_right = 800.0
 offset_bottom = 603.0
 
-[node name="UI" parent="Misc" instance=ExtResource("4_ghlyx")]
+[node name="UI" parent="UI-HUD" instance=ExtResource("4_ghlyx")]
 
-[node name="DialogueUI" parent="Misc/UI" index="0"]
+[node name="DialogueUI" parent="UI-HUD/UI" index="0"]
 offset_left = 171.0
 offset_top = -437.0
 offset_right = 171.0
 offset_bottom = -437.0
 
-[node name="Label" parent="Misc/UI/DialogueUI/DialogueBG" index="0"]
+[node name="Label" parent="UI-HUD/UI/DialogueUI/DialogueBG" index="0"]
 offset_left = -43.0
 offset_top = 412.0
 offset_right = 85.0
 offset_bottom = 412.0
 
-[node name="InventoryUI" parent="Misc/UI" index="1"]
+[node name="InventoryUI" parent="UI-HUD/UI" index="1"]
 offset_left = 564.0
 offset_top = 524.0
 offset_right = 156.0
@@ -128,7 +127,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8141, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_ktwxo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.323926, 0.412298, -2.348)
-run_time_data = ExtResource("3_pvpn5")
 _speed = 10.0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
@@ -150,7 +148,7 @@ collision_layer = 3
 collision_mask = 3
 size = Vector3(10, 4, 1)
 
-[editable path="Misc/UI"]
+[editable path="UI-HUD/UI"]
 [editable path="PickUps/Pickup"]
 [editable path="PickUps/Pickup2"]
 [editable path="PickUps/Pickup3"]

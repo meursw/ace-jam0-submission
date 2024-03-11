@@ -7,6 +7,9 @@ extends CharacterBody3D
 @export var weapon_handler: Node3D
 @export var damage_texture_regular: TextureRect
 @export var damage_texture_vomit: TextureRect
+@export var health_component: HealthComponent
+@export var shake_component: ShakeComponent
+@export var health_bar: Sprite2D
 @export_subgroup("Player Resources")
 @export var run_time_data: RunTimeData
 @export_subgroup("Player Variables")
@@ -19,6 +22,12 @@ var inventory: Inventory = Inventory.new()
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	health_component.lost_health.connect(func():
+		if health_bar.frame < 4:
+			health_bar.frame += 1
+		shake_component.tween_shake()
+	)
+	
 
 func _physics_process(delta):
 	_apply_gravity(delta)
@@ -57,7 +66,7 @@ func _handle_jump() -> void:
 
 func camera_control(event: InputEvent) -> void:
 	var mouse_motion = event as InputEventMouseMotion
-	if mouse_motion: 
+	if mouse_motion and run_time_data.curr_gameplay_state == Enums.GameState.FREE: 
 		self.rotation_degrees.y -= mouse_motion.relative.x * _mouse_sens
 		
 		var camera_tilt = _camera_3d.rotation_degrees.x

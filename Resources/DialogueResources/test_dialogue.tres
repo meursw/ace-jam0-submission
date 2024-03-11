@@ -1,9 +1,7 @@
-[gd_resource type="Resource" script_class="Dialogue" load_steps=3 format=3 uid="uid://bo08kxlnnx5it"]
+[gd_resource type="Resource" script_class="Dialogue" load_steps=2 format=3 uid="uid://bo08kxlnnx5it"]
 
 [ext_resource type="Script" path="res://Resources/ResScripts/dialogue.gd" id="1_pakrj"]
-[ext_resource type="Texture2D" uid="uid://ce60yhygy5q7" path="res://Assets/Misc/72d8ND.png" id="1_r4m8p"]
 
 [resource]
 script = ExtResource("1_pakrj")
-avatar = ExtResource("1_r4m8p")
 dialogue = Array[String](["poop"])
