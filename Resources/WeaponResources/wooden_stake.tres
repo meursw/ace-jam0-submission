@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_da27i")
 position = Vector3(0.6, -0.1, 0.2)
-rotation = Vector3(-90, 0, 0)
+rotation = Vector3(-100, 0, 0)
 weapon_type = 0
 name = "Wooden Stake"
 scene = ExtResource("2_c7c5j")

@@ -718,7 +718,7 @@ health_comp = NodePath("../HealthComponent")
 [node name="ShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
 script = ExtResource("7_smelv")
 node = NodePath("../imp1/ShakeTarget")
-shake_amount = 0.2
+shake_amount = 0.4
 shake_duration = 0.2
 
 [node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("timer")]

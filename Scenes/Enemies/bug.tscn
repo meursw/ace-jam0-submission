@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://vikkvbptwe8m"]
+[gd_scene load_steps=60 format=3 uid="uid://vikkvbptwe8m"]
 
 [ext_resource type="Texture2D" uid="uid://dkwjnllo2kp1l" path="res://Assets/Blender/WeaponAssets/textures/colour pallette.png" id="2_phn83"]
 [ext_resource type="Script" path="res://Scripts/bug.gd" id="2_qws1l"]
@@ -615,133 +615,133 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_leclc")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2exvs"]
-size = Vector3(1.8, 2.44067, 1.04402)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_rr0uo"]
 size = Vector3(1.52759, 0.411652, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2exvs"]
+size = Vector3(1.8, 2.44067, 1.04402)
 
 [sub_resource type="Animation" id="Animation_lq3hn"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath("bug1/ShakeTarget/Leg2:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(1, 1, 1)]
+"values": [Vector3(0, -0.216421, -1.5708)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("bug1/Leg2:rotation")
+tracks/1/path = NodePath("bug1/ShakeTarget/Leg3:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.216421, -1.5708)]
+"values": [Vector3(0, -0.144862, -1.5708)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("bug1/Leg3:rotation")
+tracks/2/path = NodePath("bug1/ShakeTarget/Leg4:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.144862, -1.5708)]
+"values": [Vector3(-9.04391e-08, 0.445112, -1.5708)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("bug1/Leg4:rotation")
+tracks/3/path = NodePath("bug1/ShakeTarget/Leg6:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-9.04391e-08, 0.445112, -1.5708)]
+"values": [Vector3(-1.21442e-08, -2.93641, 1.5708)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("bug1/Leg6:rotation")
+tracks/4/path = NodePath("bug1/ShakeTarget/Leg7:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-1.21442e-08, -2.93641, 1.5708)]
+"values": [Vector3(0, -2.77682, 1.5708)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("bug1/Leg7:rotation")
+tracks/5/path = NodePath("bug1/ShakeTarget/Leg8:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -2.77682, 1.5708)]
+"values": [Vector3(0, 3.3615, 1.5708)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("bug1/Leg8:rotation")
+tracks/6/path = NodePath("bug1/ShakeTarget/Tail:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 3.3615, 1.5708)]
+"values": [Vector3(0.0758357, 0.00729386, 0.014343)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("bug1/Tail:rotation")
+tracks/7/path = NodePath("bug1/ShakeTarget/Body:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.0758357, 0.00729386, 0.014343)]
+"values": [Vector3(0, 0.16057, 0)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("bug1/Body:rotation")
+tracks/8/path = NodePath("bug1/ShakeTarget/Head:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0.16057, 0)]
+"values": [Vector3(0, 0, 2.12619)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("bug1/Head:position")
+tracks/9/path = NodePath("bug1:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 2.12619)]
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_nh8es"]
@@ -751,7 +751,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("bug1/Leg2:rotation")
+tracks/0/path = NodePath("bug1/ShakeTarget/Leg2:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -763,7 +763,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("bug1/Leg3:rotation")
+tracks/1/path = NodePath("bug1/ShakeTarget/Leg3:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -775,7 +775,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("bug1/Leg4:rotation")
+tracks/2/path = NodePath("bug1/ShakeTarget/Leg4:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -787,7 +787,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("bug1/Leg6:rotation")
+tracks/3/path = NodePath("bug1/ShakeTarget/Leg6:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -799,7 +799,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("bug1/Leg7:rotation")
+tracks/4/path = NodePath("bug1/ShakeTarget/Leg7:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -811,7 +811,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("bug1/Leg8:rotation")
+tracks/5/path = NodePath("bug1/ShakeTarget/Leg8:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -823,7 +823,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("bug1/Tail:rotation")
+tracks/6/path = NodePath("bug1/ShakeTarget/Tail:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -835,7 +835,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("bug1/Body:rotation")
+tracks/7/path = NodePath("bug1/ShakeTarget/Body:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -847,7 +847,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("bug1/Head:position")
+tracks/8/path = NodePath("bug1/ShakeTarget/Head:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -860,126 +860,208 @@ tracks/8/keys = {
 [sub_resource type="Animation" id="Animation_u3g5f"]
 resource_name = "shrink_death"
 length = 0.3
+
+[sub_resource type="Animation" id="Animation_iynyi"]
+resource_name = "attack"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath("bug1/ShakeTarget/Body:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(-2, -2),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.6),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
 "update": 0,
-"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, -0.10472), Vector3(0, 0, -0.191986), Vector3(0, 0, 0.102974), Vector3(0, 0, -0.10472)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bug1/ShakeTarget/Tail:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.6),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0.0139626), Vector3(0, -0.383972, 0.0139626), Vector3(0, 0.174533, 0.0139626), Vector3(0, 0, 0.0139626)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("bug1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.6),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.41), Vector3(0, 0, -0.41), Vector3(0, 0, 0.5), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("bug1/HitboxComponent:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_clq2n"]
 _data = {
 "RESET": SubResource("Animation_lq3hn"),
+"attack": SubResource("Animation_iynyi"),
 "move": SubResource("Animation_nh8es"),
 "shrink_death": SubResource("Animation_u3g5f")
 }
 
-[node name="Bug" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "animation_player", "hurtbox_component", "hitbox_component", "health_component", "shake_component")]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lh7lb"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gx3vp"]
+animation = &"move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5vv86"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g76e8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xysoo"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_43ew1"]
+states/Start/position = Vector2(218, 100)
+states/attack/node = SubResource("AnimationNodeAnimation_lh7lb")
+states/attack/position = Vector2(569, 54)
+states/move/node = SubResource("AnimationNodeAnimation_gx3vp")
+states/move/position = Vector2(409, 59)
+transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_5vv86"), "move", "attack", SubResource("AnimationNodeStateMachineTransition_g76e8"), "attack", "move", SubResource("AnimationNodeStateMachineTransition_xysoo")]
+
+[node name="Bug" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "animation_player", "animation_tree", "hurtbox_component", "hitbox_component", "shake_component")]
 script = ExtResource("2_qws1l")
 nav_agent = NodePath("NavigationAgent3D")
 animation_player = NodePath("AnimationPlayer")
+animation_tree = NodePath("AnimationTree")
 hurtbox_component = NodePath("HurtboxComponent")
-hitbox_component = NodePath("HitboxComponent")
-health_component = NodePath("HealthComponent")
+hitbox_component = NodePath("bug1/HitboxComponent")
 shake_component = NodePath("ShakeComponent")
 
 [node name="bug1" type="Node3D" parent="."]
 
-[node name="Leg2" type="MeshInstance3D" parent="bug1"]
+[node name="ShakeTarget" type="Node3D" parent="bug1"]
+
+[node name="Leg2" type="MeshInstance3D" parent="bug1/ShakeTarget"]
 transform = Transform3D(-1.97249e-07, 0.228804, -0.0119802, -0.0557904, -8.48051e-07, 0, -4.33681e-08, 0.0503059, 0.054489, 0.546215, 0, 1.5195)
 mesh = SubResource("ArrayMesh_muhgt")
 skeleton = NodePath("")
 
-[node name="Leg3" type="MeshInstance3D" parent="bug1"]
+[node name="Leg3" type="MeshInstance3D" parent="bug1/ShakeTarget"]
 transform = Transform3D(-1.99845e-07, 0.231816, -0.00805367, -0.0557904, -8.48054e-07, 0, -2.91542e-08, 0.0338182, 0.055206, 0.570026, 0, 1.25392)
 mesh = SubResource("ArrayMesh_viqox")
 skeleton = NodePath("")
 
-[node name="Leg4" type="MeshInstance3D" parent="bug1"]
+[node name="Leg4" type="MeshInstance3D" parent="bug1/ShakeTarget"]
 transform = Transform3D(-1.8011e-07, 0.211443, 0.024021, -0.0557904, -8.48054e-07, 5.04563e-09, 9.151e-08, -0.100867, 0.0503543, 0.509583, 0, 1.00665)
 mesh = SubResource("ArrayMesh_r0rhh")
 skeleton = NodePath("")
 
-[node name="Leg6" type="MeshInstance3D" parent="bug1"]
+[node name="Leg6" type="MeshInstance3D" parent="bug1/ShakeTarget"]
 transform = Transform3D(-1.97862e-07, -0.229355, 0.0113671, -0.0557904, 8.48052e-07, -6.77529e-10, 4.04854e-08, 0.0477314, 0.0546201, -0.546215, 0, 1.5195)
 mesh = SubResource("ArrayMesh_6xwfm")
 skeleton = NodePath("")
 
-[node name="Leg7" type="MeshInstance3D" parent="bug1"]
+[node name="Leg7" type="MeshInstance3D" parent="bug1/ShakeTarget"]
 transform = Transform3D(-1.88673e-07, -0.218855, 0.0199025, -0.0557904, 8.4805e-07, 0, 7.20468e-08, 0.0835723, 0.0521196, -0.570026, 0, 1.25392)
 mesh = SubResource("ArrayMesh_ufkmw")
 skeleton = NodePath("")
 
-[node name="Leg8" type="MeshInstance3D" parent="bug1"]
+[node name="Leg8" type="MeshInstance3D" parent="bug1/ShakeTarget"]
 transform = Transform3D(-1.97097e-07, -0.228627, 0.0121701, -0.0557904, 8.48051e-07, 0, 4.40556e-08, 0.0511032, 0.0544468, -0.509583, 0, 1.00665)
 mesh = SubResource("ArrayMesh_qpqy3")
 skeleton = NodePath("")
 
-[node name="Body" type="MeshInstance3D" parent="bug1"]
-transform = Transform3D(0.38026, 0, 0.0943544, 0, 0.368616, 0, -0.0615886, 0, 0.582563, 0, 0, 1.33185)
+[node name="Body" type="MeshInstance3D" parent="bug1/ShakeTarget"]
+transform = Transform3D(0.38026, 0, 0.0943544, 0, 0.368616, 0, -0.0615886, 0, 0.582563, 0, 0.08, 1.332)
 mesh = SubResource("ArrayMesh_aexy4")
 skeleton = NodePath("")
 
-[node name="Tail" type="MeshInstance3D" parent="bug1"]
+[node name="Tail" type="MeshInstance3D" parent="bug1/ShakeTarget"]
 transform = Transform3D(0.534593, -0.00737272, 0.00417879, 0.0076463, 0.533067, -0.0435316, -0.00331832, 0.040558, 0.572909, -0.0434409, 0.187834, 0.296947)
 mesh = SubResource("ArrayMesh_dt8vw")
 skeleton = NodePath("")
 
-[node name="Head" type="MeshInstance3D" parent="bug1"]
-transform = Transform3D(0.240678, 0, 0, 0, 0.195036, -0.0197507, 0, 0.0135763, 0.283738, 0, 0, 2.12619)
+[node name="Head" type="MeshInstance3D" parent="bug1/ShakeTarget"]
+transform = Transform3D(0.239254, 0.0202161, -0.00439876, -0.0251466, 0.193986, -0.00733275, 0.00714001, 0.0135772, 0.285338, 0, 0, 2.12619)
 mesh = SubResource("ArrayMesh_aa81t")
 skeleton = NodePath("")
 
-[node name="Cube_001" type="MeshInstance3D" parent="bug1/Head"]
+[node name="Cube_001" type="MeshInstance3D" parent="bug1/ShakeTarget/Head"]
 transform = Transform3D(-0.0445848, 0.0949761, 0.202911, -0.0253543, 0.0368705, -0.681418, -0.0551019, -0.0630428, 0.0305867, 0.671889, -0.911625, 0.798638)
 mesh = SubResource("ArrayMesh_at7ba")
 skeleton = NodePath("")
 
-[node name="Cube_002" type="MeshInstance3D" parent="bug1/Head"]
+[node name="Cube_002" type="MeshInstance3D" parent="bug1/ShakeTarget/Head"]
 transform = Transform3D(-0.0362869, 0.0768222, 0.221589, -0.0236289, 0.0448149, -0.553358, -0.0471592, -0.0529357, 0.00891506, 0.79295, -0.803447, 0.676361)
 mesh = SubResource("ArrayMesh_nxo41")
 skeleton = NodePath("")
 
-[node name="Cube_003" type="MeshInstance3D" parent="bug1/Head"]
+[node name="Cube_003" type="MeshInstance3D" parent="bug1/ShakeTarget/Head"]
 transform = Transform3D(-0.0290199, 0.0614373, 0.177213, -0.0188968, 0.03584, -0.442539, -0.0377148, -0.0423345, 0.00712968, 0.79295, -0.664085, 0.525568)
 mesh = SubResource("ArrayMesh_bbh58")
 skeleton = NodePath("")
 
-[node name="Cube_004" type="MeshInstance3D" parent="bug1/Head"]
+[node name="Cube_004" type="MeshInstance3D" parent="bug1/ShakeTarget/Head"]
 transform = Transform3D(-0.0105269, -0.11901, -0.153669, -0.0264558, 0.0437913, -0.669886, -0.0659793, 0.00529949, 0.14447, -0.671889, -0.911625, 0.798638)
 mesh = SubResource("ArrayMesh_voi2i")
 skeleton = NodePath("")
 
-[node name="Cube_005" type="MeshInstance3D" parent="bug1/Head"]
+[node name="Cube_005" type="MeshInstance3D" parent="bug1/ShakeTarget/Head"]
 transform = Transform3D(-0.010484, -0.0972187, -0.1798, -0.0244634, 0.0504438, -0.540376, -0.0554, 0.00264893, 0.13711, -0.79295, -0.803447, 0.676361)
 mesh = SubResource("ArrayMesh_ojwut")
 skeleton = NodePath("")
 
-[node name="Cube_006" type="MeshInstance3D" parent="bug1/Head"]
+[node name="Cube_006" type="MeshInstance3D" parent="bug1/ShakeTarget/Head"]
 transform = Transform3D(-0.00838444, -0.0777491, -0.143792, -0.0195642, 0.0403416, -0.432157, -0.0443053, 0.00211843, 0.109651, -0.79295, -0.664085, 0.525568)
 mesh = SubResource("ArrayMesh_c1nsv")
 skeleton = NodePath("")
 
-[node name="Cone" type="MeshInstance3D" parent="bug1/Head"]
+[node name="Cone" type="MeshInstance3D" parent="bug1/ShakeTarget/Head"]
 transform = Transform3D(4.80021, -0.0844692, 0.019639, 0.0473542, 1.35349, -5.75293, 0.0657695, 3.95395, 0.930785, 0.00943504, 0.562606, 0.759689)
 mesh = SubResource("ArrayMesh_w37q3")
 skeleton = NodePath("")
 
-[node name="Cone_001" type="MeshInstance3D" parent="bug1/Head"]
+[node name="Cone_001" type="MeshInstance3D" parent="bug1/ShakeTarget/Head"]
 transform = Transform3D(-2.03545, -0.427705, 2.83334, 2.92847, 2.0746, 2.41696, -1.35173, 2.58481, -0.580883, -0.447607, 0.158506, 0.819729)
 mesh = SubResource("ArrayMesh_i6kqt")
 skeleton = NodePath("")
 
-[node name="Cone_002" type="MeshInstance3D" parent="bug1/Head"]
+[node name="Cone_002" type="MeshInstance3D" parent="bug1/ShakeTarget/Head"]
 transform = Transform3D(2.03545, 0.427705, -2.83334, 2.92847, 2.0746, 2.41696, -1.35173, 2.58481, -0.580882, 0.447607, 0.158506, 0.819729)
 mesh = SubResource("ArrayMesh_qy66r")
 skeleton = NodePath("")
+
+[node name="HitboxComponent" type="Area3D" parent="bug1" node_paths=PackedStringArray("timer")]
+collision_layer = 8
+collision_mask = 4
+monitoring = false
+script = ExtResource("7_ydc72")
+attack_speed = 0.6
+timer = NodePath("AttackSpeedTimer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bug1/HitboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0804443, -0.214035, 2.1)
+shape = SubResource("BoxShape3D_rr0uo")
+
+[node name="AttackSpeedTimer" type="Timer" parent="bug1/HitboxComponent"]
+wait_time = 0.2
+one_shot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.49012e-08, -0.0220092, 0.962427)
@@ -1003,23 +1085,9 @@ health_comp = NodePath("../HealthComponent")
 
 [node name="ShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
 script = ExtResource("6_vjcik")
-node = NodePath("../bug1")
-shake_amount = 0.2
+node = NodePath("../bug1/ShakeTarget")
+shake_amount = 0.4
 shake_duration = 0.2
-
-[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("timer")]
-collision_layer = 8
-collision_mask = 4
-script = ExtResource("7_ydc72")
-timer = NodePath("AttackSpeedTimer")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0804443, -0.214035, 2.1)
-shape = SubResource("BoxShape3D_rr0uo")
-
-[node name="AttackSpeedTimer" type="Timer" parent="HitboxComponent"]
-wait_time = 0.2
-one_shot = true
 
 [node name="HurtboxComponent" type="Area3D" parent="."]
 collision_layer = 8
@@ -1040,4 +1108,5 @@ autoplay = "move"
 libraries = {
 "": SubResource("AnimationLibrary_clq2n")
 }
+tree_root = SubResource("AnimationNodeStateMachine_43ew1")
 anim_player = NodePath("../AnimationPlayer")

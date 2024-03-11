@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs7m78tstb6od"]
+[gd_scene load_steps=7 format=3 uid="uid://cs7m78tstb6od"]
 
+[ext_resource type="Script" path="res://Scripts/ui.gd" id="1_6qucd"]
 [ext_resource type="Script" path="res://Scripts/dialogue_ui.gd" id="1_elvta"]
 [ext_resource type="Resource" uid="uid://cf8j54goebfk0" path="res://Resources/run_time_data.tres" id="2_wtgd1"]
 [ext_resource type="PackedScene" uid="uid://chkb3l7g7c56l" path="res://Scenes/UI/inventory_ui.tscn" id="3_18v1u"]
+[ext_resource type="FontFile" uid="uid://b388nkoubou0m" path="res://Assets/Fonts/CINZEL-BOLD.TTF" id="3_s37b0"]
+[ext_resource type="PackedScene" uid="uid://ca5y5cfoc1nfn" path="res://Scenes/UI/pause_menu.tscn" id="6_tiasl"]
 
-[node name="UI" type="CanvasLayer"]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("pause_menu")]
+script = ExtResource("1_6qucd")
+pause_menu = NodePath("PauseMenu")
 
 [node name="DialogueUI" type="Control" parent="." node_paths=PackedStringArray("dialogue_label")]
-visible = false
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -40,13 +44,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -61.0
-offset_top = -76.0
-offset_right = 539.0
-offset_bottom = 5.60498
+offset_left = -91.0
+offset_top = -521.0
+offset_right = 509.0
+offset_bottom = -439.395
 grow_horizontal = 2
 grow_vertical = 0
-color = Color(0.101961, 0.109804, 0.384314, 0.635294)
+color = Color(0.101961, 0.109804, 0.384314, 0)
 
 [node name="Label" type="Label" parent="DialogueUI/DialogueBG"]
 layout_mode = 1
@@ -55,6 +59,26 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "TEXT"
+theme_override_fonts/font = ExtResource("3_s37b0")
+theme_override_font_sizes/font_size = 24
 
 [node name="InventoryUI" parent="." instance=ExtResource("3_18v1u")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_tiasl")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.145, 0.145)
+pivot_offset = Vector2(20, 20)
+size_flags_horizontal = 4
+color = Color(0.886275, 0.886275, 0.886275, 0.85098)

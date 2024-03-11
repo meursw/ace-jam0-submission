@@ -67,10 +67,22 @@ shadow_enabled = true
 top_level = true
 light_mask = 0
 material = SubResource("ShaderMaterial_l6bkl")
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_right = 800.0
+offset_bottom = 603.0
 
 [node name="UI" parent="Misc" instance=ExtResource("4_ghlyx")]
+
+[node name="DialogueUI" parent="Misc/UI" index="0"]
+offset_left = 171.0
+offset_top = -437.0
+offset_right = 171.0
+offset_bottom = -437.0
+
+[node name="Label" parent="Misc/UI/DialogueUI/DialogueBG" index="0"]
+offset_left = -43.0
+offset_top = 412.0
+offset_right = 85.0
+offset_bottom = 412.0
 
 [node name="InventoryUI" parent="Misc/UI" index="1"]
 offset_left = 564.0
@@ -108,11 +120,11 @@ shape = SubResource("SphereShape3D_bdkqc")
 [node name="Ghost" parent="Enemies" instance=ExtResource("10_34ovo")]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, -0.4, 13.5767)
 
-[node name="Bug" parent="Enemies" instance=ExtResource("8_8wr2q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.7406, 0, 0)
-
 [node name="Imp" parent="Enemies" instance=ExtResource("9_goayf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.553523, 0)
+
+[node name="Bug" parent="Enemies" instance=ExtResource("8_8wr2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8141, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_ktwxo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.323926, 0.412298, -2.348)

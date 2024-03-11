@@ -23,10 +23,6 @@ func _ready():
 	GameEvents.player_died.connect(func():
 		player = null
 	)
-		
-	#hitbox_component.area_entered.connect(func(area: Area3D):
-	#	playback.travel("attack")
-	#)
 	
 
 func _process(delta):

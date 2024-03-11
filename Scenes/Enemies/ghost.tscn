@@ -466,7 +466,6 @@ health_comp = NodePath("../HealthComponent")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 collision_layer = 8
 collision_mask = 4
-monitoring = false
 script = ExtResource("8_ft5gt")
 timer = NodePath("AttackSpeedTimer")
 

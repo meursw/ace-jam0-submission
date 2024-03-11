@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/StartScene.gd" id="1_1yq73"]
 [ext_resource type="PackedScene" uid="uid://dy1tq38q4y6u" path="res://Assets/Blender/acerola_logo.blend" id="1_aaiod"]
 [ext_resource type="Shader" path="res://Shaders/ps1_postprocess.gdshader" id="1_bua0n"]
-[ext_resource type="Texture2D" uid="uid://ce60yhygy5q7" path="res://72d8ND.png" id="2_e6mux"]
+[ext_resource type="Texture2D" uid="uid://ce60yhygy5q7" path="res://Assets/Misc/72d8ND.png" id="2_e6mux"]
 [ext_resource type="Script" path="res://Assets/Blender/acerola_logo.gd" id="2_m07sj"]
 [ext_resource type="FontFile" uid="uid://b388nkoubou0m" path="res://Assets/Fonts/CINZEL-BOLD.TTF" id="5_4m8dr"]
 [ext_resource type="PackedScene" uid="uid://pxurkal5ey0q" path="res://Assets/Blender/Enviroment/pedestal.blend" id="6_m8tqd"]
@@ -63,15 +63,14 @@ shadow_enabled = true
 fov = 2.0
 
 [node name="acerola_logo" parent="." instance=ExtResource("1_aaiod")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.2, -13.2, -888.7)
-visible = false
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.3, -0.155, -10)
 script = ExtResource("2_m07sj")
 
 [node name="Plane_001" parent="acerola_logo" index="0"]
 transform = Transform3D(8.21831, 0, 0, 0, -1.1369e-07, -2.60092, 0, 2.60092, -1.1369e-07, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_5dnrp")
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Title" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.8571, -3070.14)
 pixel_size = 0.25
 modulate = Color(1, 0.992157, 1, 1)
