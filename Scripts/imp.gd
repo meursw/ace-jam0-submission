@@ -9,7 +9,7 @@ extends CharacterBody3D
 
 @export_category("Enemy Params")
 @export var _speed := 2.0
-@export var _aggro_range := 10.0
+@export var _aggro_range := 500.0
 @export var _attack_range := 1.5
 @export_category("Enemy Components")
 @export var hurtbox_component: HurtboxComponent

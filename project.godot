@@ -15,7 +15,6 @@ config/description="A short game made for the Acerola Game Jam 0 hosted on itch.
 run/main_scene="res://Levels/StartScene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/image="res://game_icon.png"
-config/icon="res://game_icon.png"
 config/windows_native_icon="res://game_icon.ico"
 
 [autoload]

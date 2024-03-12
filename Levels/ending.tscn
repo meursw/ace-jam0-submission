@@ -1,3 +1,111 @@
-[gd_scene format=3 uid="uid://brnujn0unn3t"]
+[gd_scene load_steps=11 format=3 uid="uid://brnujn0unn3t"]
+
+[ext_resource type="Script" path="res://Scripts/ending.gd" id="1_c14qc"]
+[ext_resource type="Resource" uid="uid://dja0fo8stbljh" path="res://Resources/DialogueResources/ending_dialogue.tres" id="2_cwsd7"]
+[ext_resource type="Texture2D" uid="uid://d4fwsu4ud6rr8" path="res://Assets/Blender/Enviroment/inside.png" id="2_mlioy"]
+[ext_resource type="Shader" path="res://Shaders/ps1_postprocess.gdshader" id="3_3hid7"]
+[ext_resource type="PackedScene" uid="uid://cttqgfopdwiv" path="res://Scenes/player.tscn" id="3_3onjd"]
+[ext_resource type="PackedScene" uid="uid://cs7m78tstb6od" path="res://Scenes/UI/ui.tscn" id="4_bpkny"]
+
+[sub_resource type="Environment" id="Environment_c43bp"]
+tonemap_mode = 3
+sdfgi_enabled = true
+glow_normalized = true
+glow_blend_mode = 0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.015
+volumetric_fog_albedo = Color(0.854902, 1, 1, 1)
+volumetric_fog_detail_spread = 3.4822
+volumetric_fog_sky_affect = 0.679
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cvu6m"]
+shader = ExtResource("3_3hid7")
+shader_parameter/change_color_depth = true
+shader_parameter/target_color_depth = 3
+shader_parameter/dithering = true
+shader_parameter/scale_resolution = true
+shader_parameter/target_resolution_scale = 2
+shader_parameter/enable_recolor = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bv26"]
+albedo_texture = ExtResource("2_mlioy")
+uv1_scale = Vector3(-0.955, -0.955, -0.955)
+uv1_triplanar_sharpness = 1.71573
+uv2_triplanar = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_evjxr"]
+radius = 1.7601
 
 [node name="Ending" type="Node3D"]
+script = ExtResource("1_c14qc")
+dialogue_intro = ExtResource("2_cwsd7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.984808, 0.150384, -0.0868239, 0, 0.5, 0.866026, 0.173648, -0.852869, 0.492404, 0, 0, 0)
+light_color = Color(0.968627, 0.572549, 0.341176, 1)
+light_energy = 0.6
+shadow_enabled = true
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c43bp")
+
+[node name="UI-HUD" type="Node" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="UI-HUD"]
+top_level = true
+light_mask = 0
+material = SubResource("ShaderMaterial_cvu6m")
+offset_right = 800.0
+offset_bottom = 603.0
+
+[node name="UI" parent="UI-HUD" instance=ExtResource("4_bpkny")]
+
+[node name="DialogueUI" parent="UI-HUD/UI" index="0"]
+offset_left = 171.0
+offset_top = -437.0
+offset_right = 171.0
+offset_bottom = -437.0
+
+[node name="Label" parent="UI-HUD/UI/DialogueUI/DialogueBG" index="0"]
+offset_left = -43.0
+offset_top = 412.0
+offset_right = 85.0
+offset_bottom = 412.0
+
+[node name="InventoryUI" parent="UI-HUD/UI" index="1"]
+offset_left = 564.0
+offset_top = 517.0
+offset_right = 156.0
+offset_bottom = -83.0
+scale = Vector2(0.6, 0.6)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_0bv26")
+use_collision = true
+flip_faces = true
+radius = 0.983
+height = 27.678
+sides = 32
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0997763, 0, -13.0901)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25375)
+shape = SubResource("SphereShape3D_evjxr")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0997763, 0, -13.0901)
+light_energy = 8.736
+omni_range = 32.981
+omni_attenuation = 5.09824
+
+[node name="Player" parent="." instance=ExtResource("3_3onjd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.971611, 13.1963)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+
+[editable path="UI-HUD/UI"]

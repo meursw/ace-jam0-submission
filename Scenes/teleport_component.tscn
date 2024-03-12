@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://g68g2tibnr6x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4pjya"]
+size = Vector3(2.2793, 2.66846, 2.43787)
+
+[node name="TeleportComponent" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.58694, -2.27504)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0196276, -0.834229, -0.374706)
+shape = SubResource("BoxShape3D_4pjya")

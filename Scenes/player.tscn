@@ -38,15 +38,16 @@ layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -27.0
-offset_top = 53.0
-offset_right = 13.0
-offset_bottom = 93.0
+offset_left = -317.0
+offset_top = 601.0
+offset_right = -277.0
+offset_bottom = 641.0
 grow_horizontal = 0
-scale = Vector2(1.535, 1.535)
+scale = Vector2(5, 5)
 pivot_offset = Vector2(20, 20)
 
 [node name="HealthBar" type="Sprite2D" parent="HUD"]
+texture_filter = 1
 scale = Vector2(0.540322, 0.540322)
 texture = ExtResource("14_l4do6")
 hframes = 5
@@ -62,7 +63,7 @@ script = ExtResource("2_rtkwi")
 pick_ray = NodePath("Raycast")
 
 [node name="Raycast" type="RayCast3D" parent="MainCamera"]
-target_position = Vector3(0, 0, -5)
+target_position = Vector3(0, 0, -3)
 collision_mask = 10
 collide_with_areas = true
 collide_with_bodies = false
@@ -113,7 +114,7 @@ health_comp = NodePath("../HealthComponent")
 [node name="ShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
 script = ExtResource("13_4oxi5")
 node = NodePath("../HUD/HealthBar")
-shake_amount = 4.0
+shake_amount = 6.0
 
 [node name="HurtboxComponent" type="Area3D" parent="."]
 collision_layer = 4

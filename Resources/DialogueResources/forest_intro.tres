@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_xy1dn")
-dialogue = Array[String](["Pick up the wooden stake and.. do what comes natural."])
+dialogue = Array[String](["Do what comes natural."])

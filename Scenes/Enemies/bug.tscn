@@ -949,6 +949,7 @@ script = ExtResource("2_qws1l")
 nav_agent = NodePath("NavigationAgent3D")
 animation_player = NodePath("AnimationPlayer")
 animation_tree = NodePath("AnimationTree")
+_speed = 5.0
 hurtbox_component = NodePath("HurtboxComponent")
 hitbox_component = NodePath("bug1/HitboxComponent")
 shake_component = NodePath("ShakeComponent")

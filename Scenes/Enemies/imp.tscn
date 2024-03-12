@@ -703,7 +703,7 @@ shape = SubResource("CapsuleShape3D_eupe1")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("4_6xrs3")
-health = 5
+health = 3
 
 [node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("health_comp", "hurtbox_comp")]
 script = ExtResource("5_ey7mm")

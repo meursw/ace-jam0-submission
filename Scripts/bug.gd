@@ -8,7 +8,7 @@ extends CharacterBody3D
 
 @export_category("Enemy Params")
 @export var _speed := 2.0
-@export var _aggro_range := 800.0
+@export var _aggro_range := 2000.0
 @export var _attack_range := 2.9
 @export var _gravity := 9.8
 @export_category("Enemy Components")
@@ -64,5 +64,5 @@ func _physics_process(delta: float) -> void:
 
 func look_at_target(direction: Vector3) -> void:
 	var adjusted_direction = direction
-	adjusted_direction.y = 0
+	adjusted_direction.y = 0.0
 	look_at(global_position + adjusted_direction,Vector3.UP,true)

@@ -15,6 +15,7 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_pressed("LClick"):
+		player.set_physics_process(false)
 		particles.global_position = player.global_position
 		hitbox_comp.process_mode = Node.PROCESS_MODE_INHERIT
 		if not is_open:
@@ -22,6 +23,7 @@ func _process(delta):
 			is_open = true
 			animation_player.play("open")
 	else:
+		player.set_physics_process(true)
 		hitbox_comp.process_mode = Node.PROCESS_MODE_DISABLED
 		if is_open:
 			particles.emitting = false

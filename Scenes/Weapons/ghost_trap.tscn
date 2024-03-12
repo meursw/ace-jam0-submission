@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://mb1u55xw5fle"]
+[gd_scene load_steps=21 format=3 uid="uid://mb1u55xw5fle"]
 
 [ext_resource type="PackedScene" uid="uid://c4gyvwmhn2fcv" path="res://Assets/Blender/WeaponAssets/ghost_trap.blend" id="1_bc4xf"]
 [ext_resource type="Script" path="res://Scripts/ghost_trap.gd" id="2_vi75l"]
@@ -34,8 +34,8 @@ shader = ExtResource("4_pr36m")
 render_priority = 0
 shader = ExtResource("4_pr36m")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_s1lr7"]
-radius = 2.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_1dg8f"]
+radius = 1.0
 
 [sub_resource type="Animation" id="Animation_pbltl"]
 length = 0.001
@@ -123,9 +123,43 @@ _data = {
 "spin_rings": SubResource("Animation_dt2bf")
 }
 
-[node name="ghost_trap" node_paths=PackedStringArray("hitbox_comp") instance=ExtResource("1_bc4xf")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qj7o"]
+albedo_color = Color(0.192157, 0.211765, 0.368627, 1)
+emission_enabled = true
+emission = Color(0, 0, 0.533333, 1)
+emission_energy_multiplier = 2.84
+
+[sub_resource type="Gradient" id="Gradient_0o6lf"]
+colors = PackedColorArray(0, 0, 0, 1, 0.946305, 0.900616, 0.381601, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_47eu5"]
+gradient = SubResource("Gradient_0o6lf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dcfi7"]
+lifetime_randomness = 0.5
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.1
+emission_ring_radius = 4.0
+emission_ring_inner_radius = 4.0
+gravity = Vector3(0, 4.645, 0)
+linear_accel_max = 1.4
+radial_accel_min = -5.56
+tangential_accel_max = 3.8
+scale_min = 0.5
+scale_max = 1.5
+color_ramp = SubResource("GradientTexture1D_47eu5")
+
+[sub_resource type="BoxMesh" id="BoxMesh_b2xbf"]
+size = Vector3(0.05, 0.05, 0.05)
+
+[node name="ghost_trap" node_paths=PackedStringArray("hitbox_component", "flashlight", "marker3d", "particles", "timer") instance=ExtResource("1_bc4xf")]
 script = ExtResource("2_vi75l")
-hitbox_comp = NodePath("HitboxComponent")
+hitbox_component = NodePath("HitboxComponent")
+flashlight = NodePath("OmniLight3D")
+marker3d = NodePath("Marker3D")
+particles = NodePath("GPUParticles3D")
+timer = NodePath("HitboxComponent/Timer")
 weapon_resource = ExtResource("3_c00p7")
 
 [node name="Cube" parent="." index="0"]
@@ -164,13 +198,16 @@ material_override = SubResource("ShaderMaterial_xo4cc")
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("5_lgjwd")
+attack_speed = 2.0
 timer = NodePath("Timer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-shape = SubResource("SphereShape3D_s1lr7")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522629, 0.859905, -1.01595)
+shape = SubResource("SphereShape3D_1dg8f")
 
 [node name="Timer" type="Timer" parent="HitboxComponent" index="1"]
+unique_name_in_owner = true
+wait_time = 3.0
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
@@ -178,3 +215,31 @@ libraries = {
 "": SubResource("AnimationLibrary_bvecy")
 }
 autoplay = "spin_rings"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522629, 0.859905, -0.929569)
+visible = false
+light_color = Color(0.454902, 0.423529, 0.886275, 1)
+omni_range = 1.03441
+omni_attenuation = 0.732043
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.522629, 0.859905, -0.729435)
+light_color = Color(0.454902, 0.423529, 0.886275, 1)
+light_energy = 0.7
+omni_range = 1.0
+omni_attenuation = 1.86607
+
+[node name="Marker3D" type="Marker3D" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.267836, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="10"]
+transform = Transform3D(0.16, 0, 0, 0, 0.16, 0, 0, 0, 0.16, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_3qj7o")
+emitting = false
+amount = 64
+explosiveness = 0.1
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_dcfi7")
+draw_pass_1 = SubResource("BoxMesh_b2xbf")

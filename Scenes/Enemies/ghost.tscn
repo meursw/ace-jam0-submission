@@ -1,10 +1,9 @@
-[gd_scene load_steps=37 format=3 uid="uid://g84m6pdvsd65"]
+[gd_scene load_steps=36 format=3 uid="uid://g84m6pdvsd65"]
 
 [ext_resource type="Script" path="res://Scripts/ghost.gd" id="2_r7hg1"]
 [ext_resource type="Texture2D" uid="uid://dkwjnllo2kp1l" path="res://Assets/Blender/WeaponAssets/textures/colour pallette.png" id="3_gp2ci"]
 [ext_resource type="Shader" uid="uid://bs6hpiei5wtgw" path="res://Shaders/ghost.tres" id="4_bjke5"]
-[ext_resource type="Script" path="res://Components/health_component.gd" id="4_klsji"]
-[ext_resource type="Script" path="res://Components/destroy_component.gd" id="6_n2did"]
+[ext_resource type="Script" path="res://Scripts/trap_ghost.gd" id="6_2vmhr"]
 [ext_resource type="Script" path="res://Components/hitbox_component.gd" id="8_ft5gt"]
 [ext_resource type="Script" path="res://Components/hurtbox_component.gd" id="9_sf78s"]
 
@@ -407,6 +406,8 @@ script = ExtResource("2_r7hg1")
 nav_agent = NodePath("NavigationAgent3D")
 animation_player = NodePath("GhostAnimations")
 animation_tree = NodePath("AnimationTree")
+_speed = 6.0
+_aggro_range = 20.0
 hurtbox_component = NodePath("HurtboxComponent")
 hitbox_component = NodePath("HitboxComponent")
 
@@ -431,13 +432,6 @@ material_override = SubResource("StandardMaterial3D_62pto")
 mesh = SubResource("ArrayMesh_h6mjw")
 skeleton = NodePath("")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="ghost/Cube"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.248249, 0)
-light_color = Color(0.188235, 0.0941176, 0.431373, 1)
-light_energy = 6.009
-omni_range = 1.425
-omni_attenuation = 20.3929
-
 [node name="Cube_002" type="MeshInstance3D" parent="ghost"]
 transform = Transform3D(0.0353704, 0.752974, -0.657099, -0.164169, 0.652956, 0.739389, 0.985798, 0.0817226, 0.14671, -0.991604, 1.98741, 0.72229)
 mesh = SubResource("ArrayMesh_617fi")
@@ -454,13 +448,10 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0999999, 1.6, -0.1)
 shape = SubResource("BoxShape3D_bvj4v")
 
-[node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("4_klsji")
-
-[node name="DestroyComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "health_comp")]
-script = ExtResource("6_n2did")
+[node name="TrapGhost" type="Node" parent="." node_paths=PackedStringArray("actor", "hurtbox_component")]
+script = ExtResource("6_2vmhr")
 actor = NodePath("..")
-health_comp = NodePath("../HealthComponent")
+hurtbox_component = NodePath("../HurtboxComponent")
 
 [node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("timer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)

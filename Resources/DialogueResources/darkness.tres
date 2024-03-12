@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=2 format=3 uid="uid://q8lswj50flya"]
+
+[ext_resource type="Script" path="res://Resources/ResScripts/dialogue.gd" id="1_664rn"]
+
+[resource]
+script = ExtResource("1_664rn")
+dialogue = Array[String](["One must be fearless to become a true hunter.", "Capture the ghosts by getting real close to them and activating the trap (hold down the LMB).", "After you do there will be a 2 second delay."])

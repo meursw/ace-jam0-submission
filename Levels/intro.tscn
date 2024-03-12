@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bygmy5onrshhm"]
+[gd_scene load_steps=13 format=3 uid="uid://bygmy5onrshhm"]
 
 [ext_resource type="Shader" path="res://Shaders/ps1_postprocess.gdshader" id="1_pdsh8"]
 [ext_resource type="Script" path="res://Levels/intro.gd" id="1_ueny6"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cs7m78tstb6od" path="res://Scenes/UI/ui.tscn" id="2_w40xm"]
 [ext_resource type="Texture2D" uid="uid://b066wyvxxa0ik" path="res://addons/kenney_prototype_textures/dark/texture_08.png" id="3_vyhuo"]
 [ext_resource type="PackedScene" uid="uid://cttqgfopdwiv" path="res://Scenes/player.tscn" id="4_iwg5y"]
+[ext_resource type="PackedScene" uid="uid://g68g2tibnr6x" path="res://Scenes/teleport_component.tscn" id="7_yhs2i"]
+[ext_resource type="Script" path="res://Scripts/teleport_component.gd" id="8_44eje"]
+[ext_resource type="PackedScene" uid="uid://g1bel2e1xtp2" path="res://Levels/level_1_forest.tscn" id="9_mvx17"]
 
 [sub_resource type="Environment" id="Environment_xi85p"]
 tonemap_mode = 3
@@ -24,15 +27,12 @@ shader_parameter/change_color_depth = true
 shader_parameter/target_color_depth = 3
 shader_parameter/dithering = true
 shader_parameter/scale_resolution = true
-shader_parameter/target_resolution_scale = 4
+shader_parameter/target_resolution_scale = 2
 shader_parameter/enable_recolor = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ansvr"]
 albedo_texture = ExtResource("3_vyhuo")
 uv1_triplanar = true
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_4pjya"]
-size = Vector3(2.2793, 2.66846, 2.43787)
 
 [node name="Intro" type="Node3D"]
 script = ExtResource("1_ueny6")
@@ -113,13 +113,10 @@ omni_shadow_mode = 0
 [node name="Player" parent="." instance=ExtResource("4_iwg5y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.7)
 
-[node name="TeleportToForest" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.58694, -2.27504)
+[node name="TeleportComponent" parent="." instance=ExtResource("7_yhs2i")]
+script = ExtResource("8_44eje")
+next_level = ExtResource("9_mvx17")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TeleportToForest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0196276, -0.834229, -0.374706)
-shape = SubResource("BoxShape3D_4pjya")
-
-[connection signal="body_entered" from="TeleportToForest" to="." method="_on_teleport_to_forest_body_entered"]
+[connection signal="body_entered" from="TeleportComponent" to="TeleportComponent" method="_on_body_entered"]
 
 [editable path="UI-HUD/UI"]

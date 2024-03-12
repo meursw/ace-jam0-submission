@@ -180,7 +180,7 @@ texture_filter = 1
 layout_mode = 2
 theme = ExtResource("11_wngph")
 text = "BEGIN
-EVULATION"
+EVALUATION"
 
 [node name="acerola_logo" parent="." instance=ExtResource("1_aaiod")]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.3, -0.155, -10)

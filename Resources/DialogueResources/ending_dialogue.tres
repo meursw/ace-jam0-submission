@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=2 format=3 uid="uid://dja0fo8stbljh"]
+
+[ext_resource type="Script" path="res://Resources/ResScripts/dialogue.gd" id="1_17wx7"]
+
+[resource]
+script = ExtResource("1_17wx7")
+dialogue = Array[String](["Well done. Make good use of the life you are given. Thanks for playing."])

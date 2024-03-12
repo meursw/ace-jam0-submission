@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Dialogue" load_steps=2 format=3 uid="uid://bfosheu0h5k6b"]
+
+[ext_resource type="Script" path="res://Resources/ResScripts/dialogue.gd" id="1_m603c"]
+
+[resource]
+script = ExtResource("1_m603c")
+dialogue = Array[String](["Proceed into the hole."])

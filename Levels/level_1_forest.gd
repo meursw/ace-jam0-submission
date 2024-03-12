@@ -1,19 +1,21 @@
-extends Node3D
+extends BasicLevelFunctionality
 
-@export var dialogue_intro: Dialogue
-@export var dialogue_end: Dialogue
-@onready var enemies = %Enemies
-
-var dialogue_initiated := false
+@export var cover: MeshInstance3D
+@export var spotlight: SpotLight3D
+@onready var directional_light_3d = %DirectionalLight3D
+@onready var cover_collision = %CollisionShape3D
 
 func _ready():
-	GameEvents.init_dialogue.emit(dialogue_intro)
+	super()
 
 func _process(delta):
-	if enemies.get_children().size() == 0 and not dialogue_initiated:
-		GameEvents.init_dialogue.emit(dialogue_end)
-		dialogue_initiated = true
-
+	super(delta)
+	if dialogue_initiated:
+		spotlight.show()
+		directional_light_3d.hide()
+		
+		cover.hide()
+		cover_collision.disabled = true
 
 func _on_area_3d_body_entered(body):
 	if body is Player:

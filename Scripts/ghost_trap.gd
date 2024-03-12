@@ -1,20 +1,24 @@
 extends BaseWeapon
 
-@export var hitbox_comp: HitboxComponent
+@export var hitbox_component: HitboxComponent
+@export var flashlight: OmniLight3D
+@export var marker3d: Marker3D
+@export var particles: GPUParticles3D
+@export var timer: Timer
 
-var using_trap := false
 
 func _ready():
 	super()
+	hitbox_component.area_entered.connect(func(area: Area3D):
+		area.hurt.emit(hitbox_component)
+	)
 
 func _process(delta):
 	if Input.is_action_pressed("LClick"):
-		hitbox_comp.process_mode = Node.PROCESS_MODE_INHERIT
-		if not using_trap:
-			using_trap = true
-		
-			
+		particles.emitting = true
+		hitbox_component.process_mode = Node.PROCESS_MODE_INHERIT
+		flashlight.show()
 	else:
-		hitbox_comp.process_mode = Node.PROCESS_MODE_DISABLED
-		if using_trap:
-			using_trap = false
+		particles.emitting = false
+		flashlight.hide()
+		hitbox_component.process_mode = Node.PROCESS_MODE_DISABLED
