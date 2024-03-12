@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_664rn")
-dialogue = Array[String](["One must be fearless to become a true hunter.", "Capture the ghosts by getting real close to them and activating the trap (hold down the LMB).", "After you do there will be a 2 second delay."])
+dialogue = Array[String](["One must be fearless.", "Capture the ghosts by getting real close to them and activating the trap (hold down the LMB).", "After you do there will be a 2 second delay."])

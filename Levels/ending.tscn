@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://brnujn0unn3t"]
+[gd_scene load_steps=12 format=3 uid="uid://brnujn0unn3t"]
 
 [ext_resource type="Script" path="res://Scripts/ending.gd" id="1_c14qc"]
 [ext_resource type="Resource" uid="uid://dja0fo8stbljh" path="res://Resources/DialogueResources/ending_dialogue.tres" id="2_cwsd7"]
@@ -35,6 +35,9 @@ uv2_triplanar = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_evjxr"]
 radius = 1.7601
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_86ec8"]
+size = Vector3(2, 2, 1)
 
 [node name="Ending" type="Node3D"]
 script = ExtResource("1_c14qc")
@@ -104,8 +107,14 @@ omni_range = 32.981
 omni_attenuation = 5.09824
 
 [node name="Player" parent="." instance=ExtResource("3_3onjd")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.971611, 13.1963)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.979583, 13.1963)
+
+[node name="Area3D2" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+shape = SubResource("BoxShape3D_86ec8")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Area3D2" to="." method="_on_area_3d_2_body_entered"]
 
 [editable path="UI-HUD/UI"]

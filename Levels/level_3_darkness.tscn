@@ -211,14 +211,14 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15, -
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, -0.4, -24.9)
 
 [node name="Pickup3" parent="." instance=ExtResource("8_olmjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.320038, 1.6652, 3.60526)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.320038, 1.63974, 3.60526)
 item = ExtResource("9_h6fp4")
 
 [node name="CollisionShape3D" parent="Pickup3" index="0"]
 shape = SubResource("SphereShape3D_vhx1d")
 
 [node name="pedestal" parent="Pickup3" instance=ExtResource("10_e0ra5")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.71201, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.6724, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Pickup3"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
